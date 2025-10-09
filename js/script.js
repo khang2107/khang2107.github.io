@@ -1,3 +1,32 @@
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById("darkModeToggle");
+const body = document.body;
+const darkModeIcon = darkModeToggle.querySelector("i");
+
+// Check for saved dark mode preference
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+	body.classList.add("dark-mode");
+	darkModeIcon.classList.remove("fa-moon");
+	darkModeIcon.classList.add("fa-sun");
+}
+
+// Toggle dark mode
+darkModeToggle.addEventListener("click", () => {
+	body.classList.toggle("dark-mode");
+
+	// Update icon
+	if (body.classList.contains("dark-mode")) {
+		darkModeIcon.classList.remove("fa-moon");
+		darkModeIcon.classList.add("fa-sun");
+		localStorage.setItem("theme", "dark");
+	} else {
+		darkModeIcon.classList.remove("fa-sun");
+		darkModeIcon.classList.add("fa-moon");
+		localStorage.setItem("theme", "light");
+	}
+});
+
 // Navigation Toggle
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
@@ -52,12 +81,22 @@ window.addEventListener("scroll", () => {
 
 	// Change navbar background on scroll
 	const navbar = document.querySelector(".navbar");
+	const isDarkMode = body.classList.contains("dark-mode");
+
 	if (window.scrollY > 100) {
-		navbar.style.background = "rgba(255, 255, 255, 0.98)";
+		if (isDarkMode) {
+			navbar.style.background = "rgba(29, 29, 31, 0.98)";
+		} else {
+			navbar.style.background = "rgba(255, 255, 255, 0.98)";
+		}
 		navbar.style.boxShadow =
 			"0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
 	} else {
-		navbar.style.background = "rgba(255, 255, 255, 0.95)";
+		if (isDarkMode) {
+			navbar.style.background = "rgba(29, 29, 31, 0.72)";
+		} else {
+			navbar.style.background = "rgba(255, 255, 255, 0.72)";
+		}
 	}
 });
 
