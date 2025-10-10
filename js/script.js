@@ -3,6 +3,29 @@ const darkModeToggle = document.getElementById("darkModeToggle");
 const body = document.body;
 const darkModeIcon = darkModeToggle.querySelector("i");
 
+// Function to update navbar colors based on dark mode
+function updateNavbarColors() {
+	const navbar = document.querySelector(".navbar");
+	const isDarkMode = body.classList.contains("dark-mode");
+
+	if (window.scrollY > 100) {
+		if (isDarkMode) {
+			navbar.style.background = "rgba(29, 29, 31, 0.98)";
+		} else {
+			navbar.style.background = "rgba(255, 255, 255, 0.98)";
+		}
+		navbar.style.boxShadow =
+			"0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
+	} else {
+		if (isDarkMode) {
+			navbar.style.background = "rgba(29, 29, 31, 0.72)";
+		} else {
+			navbar.style.background = "rgba(255, 255, 255, 0.72)";
+		}
+		navbar.style.boxShadow = "";
+	}
+}
+
 // Check for saved dark mode preference
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "dark") {
@@ -10,6 +33,9 @@ if (savedTheme === "dark") {
 	darkModeIcon.classList.remove("fa-moon");
 	darkModeIcon.classList.add("fa-sun");
 }
+
+// Update navbar on page load
+updateNavbarColors();
 
 // Toggle dark mode
 darkModeToggle.addEventListener("click", () => {
@@ -25,6 +51,9 @@ darkModeToggle.addEventListener("click", () => {
 		darkModeIcon.classList.add("fa-moon");
 		localStorage.setItem("theme", "light");
 	}
+
+	// Update navbar colors immediately
+	updateNavbarColors();
 });
 
 // Navigation Toggle
@@ -80,24 +109,7 @@ window.addEventListener("scroll", () => {
 	});
 
 	// Change navbar background on scroll
-	const navbar = document.querySelector(".navbar");
-	const isDarkMode = body.classList.contains("dark-mode");
-
-	if (window.scrollY > 100) {
-		if (isDarkMode) {
-			navbar.style.background = "rgba(29, 29, 31, 0.98)";
-		} else {
-			navbar.style.background = "rgba(255, 255, 255, 0.98)";
-		}
-		navbar.style.boxShadow =
-			"0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
-	} else {
-		if (isDarkMode) {
-			navbar.style.background = "rgba(29, 29, 31, 0.72)";
-		} else {
-			navbar.style.background = "rgba(255, 255, 255, 0.72)";
-		}
-	}
+	updateNavbarColors();
 });
 
 // Contact Form Handling
