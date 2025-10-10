@@ -452,6 +452,10 @@ section {
 	box-shadow: var(--shadow);
 }
 
+body.dark-mode .stat {
+	background: #2d2d30;
+}
+
 .stat h3 {
 	font-size: 2rem;
 	color: var(--text-primary);
@@ -478,6 +482,10 @@ section {
 	box-shadow: var(--shadow);
 }
 
+body.dark-mode .skill-category {
+	background: #2d2d30;
+}
+
 .skill-category h3 {
 	font-size: 1.5rem;
 	margin-bottom: 1.5rem;
@@ -502,10 +510,18 @@ section {
 	transition: var(--transition);
 }
 
+body.dark-mode .skill-item {
+	background: #1d1d1f;
+}
+
 .skill-item:hover {
 	transform: translateY(-2px);
 	box-shadow: var(--shadow);
 	background: #ebebed;
+}
+
+body.dark-mode .skill-item:hover {
+	background: #3a3a3c;
 }
 
 .skill-item i {
@@ -534,6 +550,10 @@ section {
 	overflow: hidden;
 	box-shadow: var(--shadow);
 	transition: var(--transition);
+}
+
+body.dark-mode .project-card {
+	background: #2d2d30;
 }
 
 .project-card:hover {
@@ -628,6 +648,10 @@ body.dark-mode .project-overlay {
 	font-weight: 400;
 }
 
+body.dark-mode .project-tags span {
+	background: #1d1d1f;
+}
+
 /* Experience Section */
 .timeline {
 	position: relative;
@@ -683,6 +707,10 @@ body.dark-mode .project-overlay {
 	padding: 2rem;
 	border-radius: 18px;
 	box-shadow: var(--shadow);
+}
+
+body.dark-mode .timeline-content {
+	background: #2d2d30;
 }
 
 .timeline-content h3 {
@@ -772,6 +800,10 @@ body.dark-mode .project-overlay {
 	padding: 2rem;
 	border-radius: 18px;
 	box-shadow: var(--shadow);
+}
+
+body.dark-mode .contact-form {
+	background: #2d2d30;
 }
 
 .form-group {
