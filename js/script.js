@@ -58,17 +58,27 @@ darkModeToggle.addEventListener("click", () => {
 
 // Navigation Toggle
 const navToggle = document.getElementById("navToggle");
+const navClose = document.getElementById("navClose");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
 
+// Open mobile menu
 navToggle.addEventListener("click", () => {
 	navMenu.classList.toggle("active");
+	navToggle.classList.toggle("active");
+});
+
+// Close mobile menu with close button
+navClose.addEventListener("click", () => {
+	navMenu.classList.remove("active");
+	navToggle.classList.remove("active");
 });
 
 // Close mobile menu when clicking on a link
 navLinks.forEach((link) => {
 	link.addEventListener("click", () => {
 		navMenu.classList.remove("active");
+		navToggle.classList.remove("active");
 	});
 });
 

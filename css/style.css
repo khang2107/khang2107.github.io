@@ -129,6 +129,11 @@ body.dark-mode .navbar {
 	border: none;
 	cursor: pointer;
 	padding: 0.5rem;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	justify-content: center;
+	align-items: center;
 }
 
 .nav-toggle span {
@@ -138,6 +143,63 @@ body.dark-mode .navbar {
 	margin: 3px 0;
 	transition: var(--transition);
 	border-radius: 3px;
+	position: absolute;
+}
+
+.nav-toggle span:nth-child(1) {
+	top: 10px;
+}
+
+.nav-toggle span:nth-child(2) {
+	top: 18px;
+}
+
+.nav-toggle span:nth-child(3) {
+	top: 26px;
+}
+
+/* Transform hamburger to X when menu is active */
+.nav-toggle.active span:nth-child(1) {
+	top: 18px;
+	transform: rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+	opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+	top: 18px;
+	transform: rotate(-45deg);
+}
+
+/* Close button for mobile menu */
+.nav-close {
+	display: none;
+	position: absolute;
+	top: 1.5rem;
+	right: 2rem;
+	background: none;
+	border: none;
+	font-size: 2rem;
+	color: var(--text-primary);
+	cursor: pointer;
+	transition: var(--transition);
+	width: 45px;
+	height: 45px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	z-index: 1000;
+}
+
+.nav-close:hover {
+	background: rgba(0, 0, 0, 0.08);
+	transform: rotate(90deg);
+}
+
+body.dark-mode .nav-close:hover {
+	background: rgba(255, 255, 255, 0.1);
 }
 
 /* Dark Mode Toggle */
@@ -932,6 +994,10 @@ body.dark-mode .contact-form {
 
 	.nav-menu.active {
 		left: 0;
+	}
+
+	.nav-close {
+		display: flex;
 	}
 
 	.nav-toggle {
