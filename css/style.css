@@ -702,6 +702,11 @@ body.dark-mode .project-tags span {
 	z-index: 1;
 }
 
+body.dark-mode .timeline-icon {
+	background: var(--primary-color);
+	color: white;
+}
+
 .timeline-content {
 	background: white;
 	padding: 2rem;
@@ -778,6 +783,11 @@ body.dark-mode .timeline-content {
 	color: white;
 	font-size: 1.125rem;
 	flex-shrink: 0;
+}
+
+body.dark-mode .contact-item i {
+	background: var(--primary-color);
+	color: white;
 }
 
 .contact-item h4 {
@@ -901,16 +911,18 @@ body.dark-mode .contact-form {
 	.nav-menu {
 		position: fixed;
 		left: -100%;
-		top: 70px;
+		top: 0;
 		flex-direction: column;
 		background: rgba(255, 255, 255, 0.98);
 		backdrop-filter: saturate(180%) blur(20px);
 		width: 100%;
+		height: 100vh;
 		text-align: center;
 		transition: var(--transition);
 		box-shadow: var(--shadow);
-		padding: 2rem 0;
+		padding: 5rem 2rem;
 		z-index: 999;
+		overflow-y: auto;
 	}
 
 	body.dark-mode .nav-menu {
