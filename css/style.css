@@ -836,7 +836,7 @@ body.dark-mode .resume-card {
 	height: 80px;
 	background: linear-gradient(
 		135deg,
-		var(--text-secondary)
+		var(--text-primary)
 		var(--secondary-color)
 	);
 	border-radius: 50%;
