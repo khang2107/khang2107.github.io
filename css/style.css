@@ -834,7 +834,7 @@ body.dark-mode .resume-card {
 .resume-icon {
 	width: 80px;
 	height: 80px;
-	background: var(--bg-primary);
+	background: var(--text-primary);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -842,6 +842,11 @@ body.dark-mode .resume-card {
 	margin: 0 auto 2rem;
 	font-size: 2.5rem;
 	color: white;
+	/* box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3); */
+}
+
+body.dark-mode .resume-icon {
+	background: var(--bg-primary);
 	box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
 }
 
