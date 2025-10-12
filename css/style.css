@@ -268,6 +268,52 @@ body.dark-mode .hero::before {
 	animation: fadeInUp 1s ease;
 }
 
+.hero-image {
+	margin-bottom: 2rem;
+	animation: fadeIn 1.2s ease;
+	position: relative;
+}
+
+.hero-photo {
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+	/* border: 5px solid var(--bg-primary); */
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 0 rgba(0, 113, 227, 0.4);
+	transition: var(--transition);
+	display: inline-block;
+	animation: fadeIn 1.2s ease, photoPulse 2s ease-in-out 1.5s;
+}
+
+.hero-photo:hover {
+	transform: scale(1.05);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+body.dark-mode .hero-photo {
+	border-color: var(--bg-secondary);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(41, 151, 255, 0.4);
+	animation: fadeIn 1.2s ease, photoPulseDark 2s ease-in-out 1.5s;
+}
+
+body.dark-mode .hero-photo:hover {
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes photoPulseDark {
+	0% {
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(41, 151, 255, 0.4);
+	}
+	50% {
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(41, 151, 255, 0);
+	}
+	100% {
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(41, 151, 255, 0);
+	}
+}
+
 .hero-greeting {
 	font-size: 1.125rem;
 	margin-bottom: 0.5rem;
@@ -1029,6 +1075,29 @@ body.dark-mode .contact-form {
 	}
 }
 
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes photoPulse {
+	0% {
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 0 rgba(0, 113, 227, 0.4);
+	}
+	50% {
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 15px rgba(0, 113, 227, 0);
+	}
+	100% {
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 0 rgba(0, 113, 227, 0);
+	}
+}
+
 @keyframes scrollDown {
 	0%,
 	100% {
@@ -1092,6 +1161,20 @@ body.dark-mode .contact-form {
 		height: 40px;
 	}
 
+	.hero-photo {
+		width: 140px;
+		height: 140px;
+		border-width: 4px;
+	}
+
+	.hero-image {
+		margin-bottom: 1.5rem;
+	}
+
+	.hero-greeting {
+		font-size: 1rem;
+	}
+
 	.hero-title {
 		font-size: 2.5rem;
 	}
@@ -1100,9 +1183,18 @@ body.dark-mode .contact-form {
 		font-size: 1.5rem;
 	}
 
+	.hero-description {
+		font-size: 1.0625rem;
+	}
+
 	.hero-buttons {
 		flex-direction: column;
 		align-items: center;
+	}
+
+	.hero-buttons .btn {
+		width: 100%;
+		max-width: 280px;
 	}
 
 	.about-content {
@@ -1175,8 +1267,31 @@ body.dark-mode .contact-form {
 		padding: 0 1rem;
 	}
 
+	.hero-photo {
+		width: 120px;
+		height: 120px;
+		border-width: 3px;
+	}
+
+	.hero-image {
+		margin-bottom: 1.25rem;
+	}
+
+	.hero-greeting {
+		font-size: 0.9375rem;
+	}
+
 	.hero-title {
 		font-size: 2rem;
+	}
+
+	.hero-subtitle {
+		font-size: 1.25rem;
+	}
+
+	.hero-description {
+		font-size: 1rem;
+		padding: 0 0.5rem;
 	}
 
 	.section-title {
