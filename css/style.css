@@ -722,7 +722,7 @@ body.dark-mode .project-card-link:hover .project-card {
 
 .project-image {
 	height: 200px;
-	background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+	background:  white;
 	position: relative;
 	overflow: hidden;
 	display: flex;
