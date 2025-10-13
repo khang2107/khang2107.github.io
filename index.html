@@ -237,9 +237,11 @@
 			<div class="container">
 				<div class="section-header">
 					<h2 class="section-title">Featured Projects</h2>
-					<p class="section-subtitle">Some of my recent work</p>
+					<p class="section-subtitle">Swipe to explore my recent work</p>
 				</div>
-				<div class="projects-grid">
+			</div>
+			<div class="projects-wrapper">
+				<div class="projects-scroll">
 					<div class="project-card">
 						<div class="project-image">
 							<div class="project-overlay">
@@ -251,17 +253,16 @@
 							</div>
 						</div>
 						<div class="project-info">
-							<h3>Full-Stack Web Application Carbon Emission Calculator</h3>
-							<p>
-								Web Application that helps organisations estimate and compare carbon emissions between on-prem server infrastructure and cloud-based (AWS) infrastructure.
+							<h3>Carbon Emission Calculator</h3>
+							<p class="project-description">
+								A comprehensive web application helping organisations make informed decisions about their infrastructure by comparing carbon emissions between on-premises servers and
+								AWS cloud solutions.
 							</p>
-							<p>
-								Backend: Python, AWS Lambda, API Gateway
-								<br>Frontend: HTML5, CSS3, Vanilla JavaScript
-								<br>Infrastructure: AWS SAM (Serverless Application Model)
-								<br>Local Development: Python HTTP Server
-								<br>APIs: RESTful JSON API
-							</p>
+							<div class="project-details">
+								<div class="detail-item"><strong>Backend:</strong> Python, AWS Lambda, API Gateway</div>
+								<div class="detail-item"><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript</div>
+								<div class="detail-item"><strong>Infrastructure:</strong> AWS SAM (Serverless Application Model)</div>
+							</div>
 							<div class="project-tags">
 								<span>AWS</span>
 								<span>Lambda</span>
@@ -289,10 +290,15 @@
 						</div>
 						<div class="project-info">
 							<h3>Countdown Timer</h3>
-							<p>
-								Built a terminal-based productivity application using Python 3 with object-oriented design principles. Implemented multi-threaded input handling, CSV-based data persistence, and real-time state management for interactive timer controls.
+							<p class="project-description">
+								A terminal-based productivity application built with Python 3 featuring object-oriented design, multi-threaded input handling, and CSV-based data persistence for
+								seamless timer management.
 							</p>
-							<!-- <p>Built responsive web applications using React.js for frontend and Node.js/Flask for backend services. Implemented modern UI/UX practices and RESTful APIs.</p> -->
+							<div class="project-details">
+								<div class="detail-item"><strong>Core:</strong> Python 3, OOP Design Patterns</div>
+								<div class="detail-item"><strong>Features:</strong> Multi-threading, Real-time State Management</div>
+								<div class="detail-item"><strong>Storage:</strong> CSV-based Data Persistence</div>
+							</div>
 							<div class="project-tags">
 								<span>Python</span>
 								<span>Terminal</span>
@@ -315,11 +321,16 @@
 							</div>
 						</div>
 						<div class="project-info">
-							<h3>Tic-Tac-Toe & Poker Games</h3>
-							<p>
-								Developed console-based games in Python, including a Tic-Tac-Toe game with AI opponent and a Dice Poker game with statistical tracking. Implemented abstract classes, inheritance, and modular architecture using Python standard libraries.
+							<h3>Game Collection</h3>
+							<p class="project-description">
+								Console-based gaming suite featuring Tic-Tac-Toe with intelligent AI opponent and Dice Poker with comprehensive statistical tracking. Built using advanced Python
+								concepts and modular architecture.
 							</p>
-							<!-- <p>Designed and implemented Python-based automation workflows for data extraction, transformation, and reporting. Reduced manual processing time by 70%.</p> -->
+							<div class="project-details">
+								<div class="detail-item"><strong>Games:</strong> Tic-Tac-Toe (AI), Dice Poker</div>
+								<div class="detail-item"><strong>Architecture:</strong> Abstract Classes, Inheritance, Modular Design</div>
+								<div class="detail-item"><strong>Tech:</strong> Python Standard Libraries, Statistical Analysis</div>
+							</div>
 							<div class="project-tags">
 								<span>Python</span>
 								<span>Terminal</span>
@@ -340,8 +351,16 @@
 							</div>
 						</div>
 						<div class="project-info">
-							<h3>Web Application with Auto Scaling Group</h3>
-							<p>Designed and deployed scalable three-tier web applications on AWS using Infrastructure as Code (IaC) with CloudFormation templates. Implemented auto-scaling groups with dynamic CPU-based scaling policies, Application Load Balancers for traffic distribution, and RDS MySQL databases for data persistence. Configured VPC networking with multiple availability zones, security groups for defense-in-depth, and CloudWatch alarms for automated resource management.</p>
+							<h3>AWS Auto-Scaling Infrastructure</h3>
+							<p class="project-description">
+								Enterprise-grade three-tier web application deployed on AWS with Infrastructure as Code (IaC). Features dynamic auto-scaling, high availability across multiple zones,
+								and comprehensive monitoring for optimal performance.
+							</p>
+							<div class="project-details">
+								<div class="detail-item"><strong>IaC:</strong> CloudFormation Templates, VPC Networking</div>
+								<div class="detail-item"><strong>Scaling:</strong> Auto-scaling Groups, CPU-based Policies, Load Balancers</div>
+								<div class="detail-item"><strong>Data:</strong> RDS MySQL, CloudWatch Monitoring</div>
+							</div>
 							<div class="project-tags">
 								<span>AWS</span>
 								<span>CloudFormation</span>
