@@ -14,8 +14,7 @@ function updateNavbarColors() {
 		} else {
 			navbar.style.background = "rgba(255, 255, 255, 0.98)";
 		}
-		navbar.style.boxShadow =
-			"0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
+		navbar.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
 	} else {
 		if (isDarkMode) {
 			navbar.style.background = "rgba(29, 29, 31, 0.72)";
@@ -157,14 +156,10 @@ const observer = new IntersectionObserver((entries) => {
 	});
 }, observerOptions);
 
-// Observe elements for animation
-document
-	.querySelectorAll(
-		".project-card, .skill-category, .timeline-item, .about-content"
-	)
-	.forEach((el) => {
-		observer.observe(el);
-	});
+// Observe elements for animation (removed .timeline-item to eliminate flash effect)
+document.querySelectorAll(".project-card, .skill-category, .about-content").forEach((el) => {
+	observer.observe(el);
+});
 
 // Add typing effect to hero subtitle (optional enhancement)
 function typeWriter(element, text, speed = 100) {
@@ -294,9 +289,7 @@ if (aboutStats) {
 }
 
 // Form validation
-const formInputs = document.querySelectorAll(
-	".form-group input, .form-group textarea"
-);
+const formInputs = document.querySelectorAll(".form-group input, .form-group textarea");
 
 formInputs.forEach((input) => {
 	input.addEventListener("blur", function () {
