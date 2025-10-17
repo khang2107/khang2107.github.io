@@ -141,26 +141,6 @@ contactForm.addEventListener("submit", (e) => {
 	contactForm.reset();
 });
 
-// Intersection Observer for scroll animations
-const observerOptions = {
-	threshold: 0.1,
-	rootMargin: "0px 0px -50px 0px",
-};
-
-const observer = new IntersectionObserver((entries) => {
-	entries.forEach((entry) => {
-		if (entry.isIntersecting) {
-			entry.target.style.animation = "fadeInUp 0.8s ease forwards";
-			observer.unobserve(entry.target);
-		}
-	});
-}, observerOptions);
-
-// Observe elements for animation (removed .timeline-item to eliminate flash effect)
-document.querySelectorAll(".project-card, .skill-category, .about-content").forEach((el) => {
-	observer.observe(el);
-});
-
 // Add typing effect to hero subtitle (optional enhancement)
 function typeWriter(element, text, speed = 100) {
 	let i = 0;
@@ -229,19 +209,6 @@ document.querySelectorAll(".skill-item").forEach((item) => {
 
 	item.addEventListener("mouseleave", function () {
 		this.style.transform = "translateY(0) scale(1)";
-	});
-});
-
-// Project cards hover effect enhancement
-document.querySelectorAll(".project-card").forEach((card) => {
-	card.addEventListener("mouseenter", function () {
-		const overlay = this.querySelector(".project-overlay");
-		overlay.style.opacity = "1";
-	});
-
-	card.addEventListener("mouseleave", function () {
-		const overlay = this.querySelector(".project-overlay");
-		overlay.style.opacity = "0";
 	});
 });
 
