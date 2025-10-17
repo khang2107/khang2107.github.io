@@ -97,29 +97,40 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 	});
 });
 
-// Active navigation link on scroll
-window.addEventListener("scroll", () => {
-	let current = "";
-	const sections = document.querySelectorAll("section");
+// Optimized scroll handler with throttling
+let scrollTimeout;
+let ticking = false;
 
-	sections.forEach((section) => {
-		const sectionTop = section.offsetTop;
-		const sectionHeight = section.clientHeight;
-		if (scrollY >= sectionTop - 200) {
-			current = section.getAttribute("id");
-		}
-	});
+function handleScroll() {
+	if (!ticking) {
+		window.requestAnimationFrame(() => {
+			let current = "";
+			const sections = document.querySelectorAll("section");
 
-	navLinks.forEach((link) => {
-		link.classList.remove("active");
-		if (link.getAttribute("href") === `#${current}`) {
-			link.classList.add("active");
-		}
-	});
+			sections.forEach((section) => {
+				const sectionTop = section.offsetTop;
+				if (window.scrollY >= sectionTop - 200) {
+					current = section.getAttribute("id");
+				}
+			});
 
-	// Change navbar background on scroll
-	updateNavbarColors();
-});
+			navLinks.forEach((link) => {
+				link.classList.remove("active");
+				if (link.getAttribute("href") === `#${current}`) {
+					link.classList.add("active");
+				}
+			});
+
+			// Change navbar background on scroll
+			updateNavbarColors();
+
+			ticking = false;
+		});
+		ticking = true;
+	}
+}
+
+window.addEventListener("scroll", handleScroll, { passive: true });
 
 // Contact Form Handling
 const contactForm = document.getElementById("contactForm");
@@ -163,43 +174,6 @@ function typeWriter(element, text, speed = 100) {
 //     const text = subtitle.textContent;
 //     typeWriter(subtitle, text, 100);
 // });
-
-// Parallax effect for hero section
-window.addEventListener("scroll", () => {
-	const scrolled = window.pageYOffset;
-	const hero = document.querySelector(".hero-content");
-	if (hero) {
-		hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-		hero.style.opacity = 1 - scrolled * 0.002;
-	}
-});
-
-// Add active class to current navigation item
-function setActiveNav() {
-	const sections = document.querySelectorAll("section[id]");
-	const navLinks = document.querySelectorAll(".nav-link");
-
-	window.addEventListener("scroll", () => {
-		let current = "";
-
-		sections.forEach((section) => {
-			const sectionTop = section.offsetTop;
-			const sectionHeight = section.clientHeight;
-			if (window.pageYOffset >= sectionTop - 200) {
-				current = section.getAttribute("id");
-			}
-		});
-
-		navLinks.forEach((link) => {
-			link.classList.remove("active");
-			if (link.getAttribute("href") === `#${current}`) {
-				link.classList.add("active");
-			}
-		});
-	});
-}
-
-setActiveNav();
 
 // Skill items hover effect
 document.querySelectorAll(".skill-item").forEach((item) => {
@@ -299,13 +273,24 @@ function createScrollToTopButton() {
 
 	document.body.appendChild(button);
 
-	window.addEventListener("scroll", () => {
-		if (window.pageYOffset > 300) {
-			button.style.display = "flex";
-		} else {
-			button.style.display = "none";
-		}
-	});
+	let scrollTopTicking = false;
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (!scrollTopTicking) {
+				window.requestAnimationFrame(() => {
+					if (window.pageYOffset > 300) {
+						button.style.display = "flex";
+					} else {
+						button.style.display = "none";
+					}
+					scrollTopTicking = false;
+				});
+				scrollTopTicking = true;
+			}
+		},
+		{ passive: true }
+	);
 
 	button.addEventListener("click", () => {
 		window.scrollTo({
