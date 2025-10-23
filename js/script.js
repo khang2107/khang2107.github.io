@@ -135,21 +135,45 @@ window.addEventListener("scroll", handleScroll, { passive: true });
 // Contact Form Handling
 const contactForm = document.getElementById("contactForm");
 
-contactForm.addEventListener("submit", (e) => {
+contactForm.addEventListener("submit", async (e) => {
 	e.preventDefault();
 
-	// Get form values
-	const name = document.getElementById("name").value;
-	const email = document.getElementById("email").value;
-	const subject = document.getElementById("subject").value;
-	const message = document.getElementById("message").value;
+	// Get form button
+	const submitButton = contactForm.querySelector('button[type="submit"]');
+	const originalButtonText = submitButton.innerHTML;
 
-	// Here you would typically send this to a backend service
-	// For now, we'll just show an alert
-	alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
+	// Disable button and show loading state
+	submitButton.disabled = true;
+	submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-	// Reset form
-	contactForm.reset();
+	try {
+		// Submit form to Formspree
+		const formData = new FormData(contactForm);
+		const response = await fetch(contactForm.action, {
+			method: "POST",
+			body: formData,
+			headers: {
+				Accept: "application/json",
+			},
+		});
+
+		if (response.ok) {
+			// Success
+			const name = document.getElementById("name").value;
+			alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
+			contactForm.reset();
+		} else {
+			// Error from Formspree
+			alert("Oops! There was a problem submitting your form. Please try again or contact me directly via email.");
+		}
+	} catch (error) {
+		// Network error
+		alert("Oops! There was a problem submitting your form. Please try again or contact me directly via email.");
+	} finally {
+		// Re-enable button
+		submitButton.disabled = false;
+		submitButton.innerHTML = originalButtonText;
+	}
 });
 
 // Add typing effect to hero subtitle (optional enhancement)
