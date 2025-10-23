@@ -14,8 +14,7 @@ function updateNavbarColors() {
 		} else {
 			navbar.style.background = "rgba(255, 255, 255, 0.98)";
 		}
-		navbar.style.boxShadow =
-			"0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
+		navbar.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
 	} else {
 		if (isDarkMode) {
 			navbar.style.background = "rgba(29, 29, 31, 0.72)";
@@ -98,29 +97,40 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 	});
 });
 
-// Active navigation link on scroll
-window.addEventListener("scroll", () => {
-	let current = "";
-	const sections = document.querySelectorAll("section");
+// Optimized scroll handler with throttling
+let scrollTimeout;
+let ticking = false;
 
-	sections.forEach((section) => {
-		const sectionTop = section.offsetTop;
-		const sectionHeight = section.clientHeight;
-		if (scrollY >= sectionTop - 200) {
-			current = section.getAttribute("id");
-		}
-	});
+function handleScroll() {
+	if (!ticking) {
+		window.requestAnimationFrame(() => {
+			let current = "";
+			const sections = document.querySelectorAll("section");
 
-	navLinks.forEach((link) => {
-		link.classList.remove("active");
-		if (link.getAttribute("href") === `#${current}`) {
-			link.classList.add("active");
-		}
-	});
+			sections.forEach((section) => {
+				const sectionTop = section.offsetTop;
+				if (window.scrollY >= sectionTop - 200) {
+					current = section.getAttribute("id");
+				}
+			});
 
-	// Change navbar background on scroll
-	updateNavbarColors();
-});
+			navLinks.forEach((link) => {
+				link.classList.remove("active");
+				if (link.getAttribute("href") === `#${current}`) {
+					link.classList.add("active");
+				}
+			});
+
+			// Change navbar background on scroll
+			updateNavbarColors();
+
+			ticking = false;
+		});
+		ticking = true;
+	}
+}
+
+window.addEventListener("scroll", handleScroll, { passive: true });
 
 // Contact Form Handling
 const contactForm = document.getElementById("contactForm");
@@ -141,30 +151,6 @@ contactForm.addEventListener("submit", (e) => {
 	// Reset form
 	contactForm.reset();
 });
-
-// Intersection Observer for scroll animations
-const observerOptions = {
-	threshold: 0.1,
-	rootMargin: "0px 0px -50px 0px",
-};
-
-const observer = new IntersectionObserver((entries) => {
-	entries.forEach((entry) => {
-		if (entry.isIntersecting) {
-			entry.target.style.animation = "fadeInUp 0.8s ease forwards";
-			observer.unobserve(entry.target);
-		}
-	});
-}, observerOptions);
-
-// Observe elements for animation
-document
-	.querySelectorAll(
-		".project-card, .skill-category, .timeline-item, .about-content"
-	)
-	.forEach((el) => {
-		observer.observe(el);
-	});
 
 // Add typing effect to hero subtitle (optional enhancement)
 function typeWriter(element, text, speed = 100) {
@@ -189,43 +175,6 @@ function typeWriter(element, text, speed = 100) {
 //     typeWriter(subtitle, text, 100);
 // });
 
-// Parallax effect for hero section
-window.addEventListener("scroll", () => {
-	const scrolled = window.pageYOffset;
-	const hero = document.querySelector(".hero-content");
-	if (hero) {
-		hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-		hero.style.opacity = 1 - scrolled * 0.002;
-	}
-});
-
-// Add active class to current navigation item
-function setActiveNav() {
-	const sections = document.querySelectorAll("section[id]");
-	const navLinks = document.querySelectorAll(".nav-link");
-
-	window.addEventListener("scroll", () => {
-		let current = "";
-
-		sections.forEach((section) => {
-			const sectionTop = section.offsetTop;
-			const sectionHeight = section.clientHeight;
-			if (window.pageYOffset >= sectionTop - 200) {
-				current = section.getAttribute("id");
-			}
-		});
-
-		navLinks.forEach((link) => {
-			link.classList.remove("active");
-			if (link.getAttribute("href") === `#${current}`) {
-				link.classList.add("active");
-			}
-		});
-	});
-}
-
-setActiveNav();
-
 // Skill items hover effect
 document.querySelectorAll(".skill-item").forEach((item) => {
 	item.addEventListener("mouseenter", function () {
@@ -234,19 +183,6 @@ document.querySelectorAll(".skill-item").forEach((item) => {
 
 	item.addEventListener("mouseleave", function () {
 		this.style.transform = "translateY(0) scale(1)";
-	});
-});
-
-// Project cards hover effect enhancement
-document.querySelectorAll(".project-card").forEach((card) => {
-	card.addEventListener("mouseenter", function () {
-		const overlay = this.querySelector(".project-overlay");
-		overlay.style.opacity = "1";
-	});
-
-	card.addEventListener("mouseleave", function () {
-		const overlay = this.querySelector(".project-overlay");
-		overlay.style.opacity = "0";
 	});
 });
 
@@ -294,9 +230,7 @@ if (aboutStats) {
 }
 
 // Form validation
-const formInputs = document.querySelectorAll(
-	".form-group input, .form-group textarea"
-);
+const formInputs = document.querySelectorAll(".form-group input, .form-group textarea");
 
 formInputs.forEach((input) => {
 	input.addEventListener("blur", function () {
@@ -339,13 +273,24 @@ function createScrollToTopButton() {
 
 	document.body.appendChild(button);
 
-	window.addEventListener("scroll", () => {
-		if (window.pageYOffset > 300) {
-			button.style.display = "flex";
-		} else {
-			button.style.display = "none";
-		}
-	});
+	let scrollTopTicking = false;
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (!scrollTopTicking) {
+				window.requestAnimationFrame(() => {
+					if (window.pageYOffset > 300) {
+						button.style.display = "flex";
+					} else {
+						button.style.display = "none";
+					}
+					scrollTopTicking = false;
+				});
+				scrollTopTicking = true;
+			}
+		},
+		{ passive: true }
+	);
 
 	button.addEventListener("click", () => {
 		window.scrollTo({
