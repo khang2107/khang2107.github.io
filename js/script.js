@@ -147,28 +147,29 @@ contactForm.addEventListener("submit", async (e) => {
 	submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
 	try {
-		// Submit form to Formspree
+		// Submit form to Web3Forms
 		const formData = new FormData(contactForm);
 		const response = await fetch(contactForm.action, {
 			method: "POST",
 			body: formData,
-			headers: {
-				Accept: "application/json",
-			},
 		});
 
-		if (response.ok) {
+		const result = await response.json();
+
+		if (result.success) {
 			// Success
 			const name = document.getElementById("name").value;
 			alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
 			contactForm.reset();
 		} else {
-			// Error from Formspree
+			// Error from Web3Forms
 			alert("Oops! There was a problem submitting your form. Please try again or contact me directly via email.");
+			console.error("Form submission error:", result);
 		}
 	} catch (error) {
 		// Network error
 		alert("Oops! There was a problem submitting your form. Please try again or contact me directly via email.");
+		console.error("Network error:", error);
 	} finally {
 		// Re-enable button
 		submitButton.disabled = false;
