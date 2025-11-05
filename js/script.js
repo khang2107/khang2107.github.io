@@ -1,36 +1,62 @@
-// Image Loading Optimization
-// Preload critical images and add loaded class when complete
+// Image Loading Optimization - Apple-style aggressive preloading
 document.addEventListener("DOMContentLoaded", () => {
-	// Add loaded class to images as they load
 	const images = document.querySelectorAll("img[loading='lazy']");
 	
 	if ("IntersectionObserver" in window) {
+		// Apple uses very aggressive preloading - load images well before they're visible
 		const imageObserver = new IntersectionObserver(
 			(entries, observer) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						const img = entry.target;
-						img.addEventListener("load", () => {
+						
+						// Force immediate loading by removing lazy attribute
+						img.removeAttribute("loading");
+						
+						// Add loaded class when image is fully loaded
+						if (img.complete) {
 							img.classList.add("loaded");
-						});
+						} else {
+							img.addEventListener("load", () => {
+								img.classList.add("loaded");
+							}, { once: true });
+						}
+						
 						observer.unobserve(img);
 					}
 				});
 			},
 			{
-				rootMargin: "50px", // Start loading 50px before entering viewport
+				// Apple-style: Start loading 2 screens before visible
+				rootMargin: "200% 0px 200% 0px",
 			}
 		);
 
 		images.forEach((img) => imageObserver.observe(img));
 	} else {
-		// Fallback for older browsers
+		// Fallback: load all images immediately
 		images.forEach((img) => {
+			img.removeAttribute("loading");
 			img.addEventListener("load", () => {
 				img.classList.add("loaded");
-			});
+			}, { once: true });
 		});
 	}
+	
+	// Preload achievement images on page load for instant display
+	setTimeout(() => {
+		const achievementImages = document.querySelectorAll(".achievement-item img");
+		achievementImages.forEach((img) => {
+			if (!img.complete) {
+				const imgSrc = img.getAttribute("src");
+				const preloadLink = document.createElement("link");
+				preloadLink.rel = "preload";
+				preloadLink.as = "image";
+				preloadLink.href = imgSrc;
+				document.head.appendChild(preloadLink);
+			}
+		});
+	}, 100);
 });
 
 // Dark Mode Toggle
