@@ -337,4 +337,139 @@ function createScrollToTopButton() {
 
 createScrollToTopButton();
 
+// Achievement Lightbox Modal
+const achievementModal = document.getElementById("achievementModal");
+const modalImage = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const modalClose = document.querySelector(".modal-close");
+const modalPrev = document.querySelector(".modal-prev");
+const modalNext = document.querySelector(".modal-next");
+const modalOverlay = document.querySelector(".modal-overlay");
+
+let currentAchievementIndex = 0;
+let achievementItems = [];
+
+// Initialize achievement items array
+function initAchievementModal() {
+	achievementItems = Array.from(document.querySelectorAll(".achievement-item"));
+
+	// Add click handlers to achievement items
+	achievementItems.forEach((item, index) => {
+		item.addEventListener("click", () => {
+			openModal(index);
+		});
+	});
+}
+
+// Open modal with specific achievement
+function openModal(index) {
+	currentAchievementIndex = index;
+	const item = achievementItems[index];
+
+	const imgSrc = item.getAttribute("data-achievement-img");
+	const title = item.getAttribute("data-achievement-title");
+	const desc = item.getAttribute("data-achievement-desc");
+
+	modalImage.src = imgSrc;
+	modalImage.alt = title;
+	modalTitle.textContent = title;
+	modalDesc.textContent = desc;
+
+	achievementModal.classList.add("active");
+	achievementModal.setAttribute("aria-hidden", "false");
+	document.body.style.overflow = "hidden"; // Prevent background scrolling
+}
+
+// Close modal
+function closeModal() {
+	achievementModal.classList.remove("active");
+	achievementModal.setAttribute("aria-hidden", "true");
+	document.body.style.overflow = ""; // Restore scrolling
+}
+
+// Navigate to previous achievement
+function showPrevious() {
+	currentAchievementIndex = currentAchievementIndex > 0 ? currentAchievementIndex - 1 : achievementItems.length - 1;
+	const item = achievementItems[currentAchievementIndex];
+
+	const imgSrc = item.getAttribute("data-achievement-img");
+	const title = item.getAttribute("data-achievement-title");
+	const desc = item.getAttribute("data-achievement-desc");
+
+	modalImage.src = imgSrc;
+	modalImage.alt = title;
+	modalTitle.textContent = title;
+	modalDesc.textContent = desc;
+}
+
+// Navigate to next achievement
+function showNext() {
+	currentAchievementIndex = currentAchievementIndex < achievementItems.length - 1 ? currentAchievementIndex + 1 : 0;
+	const item = achievementItems[currentAchievementIndex];
+
+	const imgSrc = item.getAttribute("data-achievement-img");
+	const title = item.getAttribute("data-achievement-title");
+	const desc = item.getAttribute("data-achievement-desc");
+
+	modalImage.src = imgSrc;
+	modalImage.alt = title;
+	modalTitle.textContent = title;
+	modalDesc.textContent = desc;
+}
+
+// Event listeners for modal
+modalClose.addEventListener("click", closeModal);
+modalOverlay.addEventListener("click", closeModal);
+modalPrev.addEventListener("click", showPrevious);
+modalNext.addEventListener("click", showNext);
+
+// Keyboard navigation
+document.addEventListener("keydown", (e) => {
+	if (!achievementModal.classList.contains("active")) return;
+
+	if (e.key === "Escape") {
+		closeModal();
+	} else if (e.key === "ArrowLeft") {
+		showPrevious();
+	} else if (e.key === "ArrowRight") {
+		showNext();
+	}
+});
+
+// Touch swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+modalImage.addEventListener(
+	"touchstart",
+	(e) => {
+		touchStartX = e.changedTouches[0].screenX;
+	},
+	{ passive: true }
+);
+
+modalImage.addEventListener(
+	"touchend",
+	(e) => {
+		touchEndX = e.changedTouches[0].screenX;
+		handleSwipe();
+	},
+	{ passive: true }
+);
+
+function handleSwipe() {
+	const swipeThreshold = 50;
+	if (touchEndX < touchStartX - swipeThreshold) {
+		// Swipe left - show next
+		showNext();
+	} else if (touchEndX > touchStartX + swipeThreshold) {
+		// Swipe right - show previous
+		showPrevious();
+	}
+}
+
+// Initialize modal on page load
+initAchievementModal();
+
 console.log("Portfolio website loaded successfully!");
