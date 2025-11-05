@@ -6,11 +6,26 @@
 		<meta name="description" content="David Khang - Software Engineer" />
 		<meta name="author" content="David Khang" />
 		<title>David Khang</title>
+		
+		<!-- Preload critical CSS -->
+		<link rel="preload" href="css/style.css" as="style" />
 		<link rel="stylesheet" href="css/style.css" />
-		<link rel="preconnect" href="//fonts.googleapis.com" />
-		<link rel="preconnect" href="//fonts.gstatic.com" crossorigin />
-		<link href="//fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+		
+		<!-- Preconnect to external resources -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+		
+		<!-- Preload critical above-the-fold image -->
+		<link rel="preload" href="image/avatar/casual-photo.JPEG" as="image" />
+		
+		<!-- Load fonts asynchronously -->
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+		<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+		
+		<!-- Load Font Awesome asynchronously -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
 	</head>
 	<body>
 		<!-- Navigation -->
@@ -53,7 +68,7 @@
 			<div class="container">
 				<div class="hero-content">
 					<div class="hero-image">
-						<img src="image/avatar/casual-photo.JPEG" alt="David Khang" class="hero-photo" />
+						<img src="image/avatar/casual-photo.JPEG" alt="David Khang" class="hero-photo" fetchpriority="high" />
 					</div>
 					<p class="hero-greeting">Hi, I'm David</p>
 					<h1 class="hero-title">David Khang</h1>
@@ -97,7 +112,7 @@
 				</div>
 				<div class="about-content">
 					<div class="about-image">
-						<img src="image/avatar/prof-photo.JPG" alt="David Khang" class="profile-photo" />
+						<img src="image/avatar/prof-photo.JPG" alt="David Khang" class="profile-photo" loading="lazy" decoding="async" />
 					</div>
 					<div class="about-text">
 						<p>
@@ -239,63 +254,63 @@
 				</div>
 				<div class="achievements-grid">
 					<div class="achievement-item" data-achievement-img="image/achievement/DIT.jpg" data-achievement-title="DIT Excellence" data-achievement-desc="Department for Infrastructure and Transport">
-						<img src="image/achievement/DIT.jpg" alt="Department for Infrastructure and Transport Achievement" loading="lazy" />
+						<img src="image/achievement/DIT.jpg" alt="Department for Infrastructure and Transport Achievement" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>DIT Excellence</h3>
 							<p>Department for Infrastructure and Transport</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/DIT-Orientation.jpg" data-achievement-title="Orientation 2025" data-achievement-desc="Adelaide University Orientation Day 2025">
-						<img src="image/achievement/DIT-Orientation.jpg" alt="Department for Infrastructure and Transport Achievement" loading="lazy" />
+						<img src="image/achievement/DIT-Orientation.jpg" alt="Department for Infrastructure and Transport Achievement" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>Orientation 2025</h3>
 							<p>Adelaide University Orientation Day 2025</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/dit-team.JPG" data-achievement-title="DIT Orientation Team" data-achievement-desc="Adelaide University Orientation Day 2025">
-						<img src="image/achievement/dit-team.JPG" alt="Department for Infrastructure and Transport Achievement" loading="lazy" />
+						<img src="image/achievement/dit-team.JPG" alt="Department for Infrastructure and Transport Achievement" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>DIT Orientation Info Team</h3>
 							<p>Adelaide University Orientation Day 2025</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/DIT-featured.png" data-achievement-title="DIT Newsletter Featured" data-achievement-desc="Featured on the Weekly DIT Newsletter">
-						<img src="image/achievement/DIT-featured.png" alt="Department for Infrastructure and Transport Achievement" loading="lazy" />
+						<img src="image/achievement/DIT-featured.png" alt="Department for Infrastructure and Transport Achievement" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>DIT Newsletter Featured</h3>
 							<p>Featured on the Weekly DIT Newsletter</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/ICPC.jpg" data-achievement-title="ICPC Competition 2020" data-achievement-desc="International Collegiate Programming Contest">
-						<img src="image/achievement/ICPC.jpg" alt="ICPC Programming Competition" loading="lazy" />
+						<img src="image/achievement/ICPC.jpg" alt="ICPC Programming Competition" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>ICPC Competition 2020</h3>
 							<p>International Collegiate Programming Contest</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/accenture-internship.png" data-achievement-title="Accenture Internship" data-achievement-desc="Full-Stack Software Engineer Internship at Accenture">
-						<img src="image/achievement/accenture-internship.png" alt="Accenture Internship" loading="lazy" />
+						<img src="image/achievement/accenture-internship.png" alt="Accenture Internship" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>Accenture Internship</h3>
 							<p>Full-Stack Software Engineer Internship at Accenture</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/pwc-internship-2.jpeg" data-achievement-title="PwC Experience" data-achievement-desc="Technology Risks & Controls Assurance">
-						<img src="image/achievement/pwc-internship-2.jpeg" alt="PwC Internship" loading="lazy" />
+						<img src="image/achievement/pwc-internship-2.jpeg" alt="PwC Internship" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>PwC Internship</h3>
 							<p>Technology Risks & Controls Assurance</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/pwc-internship.jpeg" data-achievement-title="PwC Team" data-achievement-desc="Our PwC Internship Friend Group going on a trip">
-						<img src="image/achievement/pwc-internship.jpeg" alt="PwC Intern Team" loading="lazy" />
+						<img src="image/achievement/pwc-internship.jpeg" alt="PwC Intern Team" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>PwC Intern Team</h3>
 							<p>Our PwC Interns Friend Group going on a trip</p>
 						</div>
 					</div>
 					<div class="achievement-item" data-achievement-img="image/achievement/space-hackathon.JPG" data-achievement-title="Space & Innovation Hackathon Winner 2020" data-achievement-desc="The winners of the Space & Innovation Hackathon 2020">
-						<img src="image/achievement/space-hackathon.JPG" alt="PwC Team" loading="lazy" />
+						<img src="image/achievement/space-hackathon.JPG" alt="Space Hackathon Winner" loading="lazy" decoding="async" />
 						<div class="achievement-overlay">
 							<h3>Space Hackathon Winner 2020</h3>
 							<p>The winners of the Space & Innovation Hackathon 2020</p>

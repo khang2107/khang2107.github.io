@@ -1,3 +1,38 @@
+// Image Loading Optimization
+// Preload critical images and add loaded class when complete
+document.addEventListener("DOMContentLoaded", () => {
+	// Add loaded class to images as they load
+	const images = document.querySelectorAll("img[loading='lazy']");
+	
+	if ("IntersectionObserver" in window) {
+		const imageObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const img = entry.target;
+						img.addEventListener("load", () => {
+							img.classList.add("loaded");
+						});
+						observer.unobserve(img);
+					}
+				});
+			},
+			{
+				rootMargin: "50px", // Start loading 50px before entering viewport
+			}
+		);
+
+		images.forEach((img) => imageObserver.observe(img));
+	} else {
+		// Fallback for older browsers
+		images.forEach((img) => {
+			img.addEventListener("load", () => {
+				img.classList.add("loaded");
+			});
+		});
+	}
+});
+
 // Dark Mode Toggle
 const darkModeToggle = document.getElementById("darkModeToggle");
 const body = document.body;
