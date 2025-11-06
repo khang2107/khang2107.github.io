@@ -298,12 +298,8 @@ body.dark-mode .dark-mode-toggle:hover {
 	justify-content: center;
 	padding-top: 80px;
 	position: relative;
-	background: #fbfbfd;
+	background: var(--bg-primary);
 	color: var(--text-primary);
-}
-
-body.dark-mode .hero {
-	background: #000000;
 }
 
 .hero::before {
@@ -634,6 +630,10 @@ body.dark-mode .stat {
 }
 
 /* Skills Section */
+.skills {
+	background: var(--bg-primary);
+}
+
 .skills-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -700,7 +700,7 @@ body.dark-mode .skill-item:hover {
 
 /* Achievements Section */
 .achievements {
-	background: var(--bg-primary);
+	background: var(--bg-secondary);
 	padding: 5rem 0;
 }
 
@@ -784,7 +784,7 @@ body.dark-mode .achievement-item {
 
 /* Projects Section */
 .projects {
-	background: var(--bg-secondary);
+	background: var(--bg-primary);
 	padding-bottom: 5rem;
 }
 
@@ -805,7 +805,7 @@ body.dark-mode .achievement-item {
 	right: 0;
 	bottom: 1.5rem;
 	width: 100px;
-	background: linear-gradient(to left, var(--bg-secondary) 0%, transparent 100%);
+	background: linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);
 	pointer-events: none;
 	opacity: 0.8;
 	z-index: 1;
@@ -1013,6 +1013,10 @@ body.dark-mode .project-tags span {
 }
 
 /* Experience Section */
+.experience {
+	background: var(--bg-secondary);
+}
+
 .timeline {
 	position: relative;
 	max-width: 900px;
