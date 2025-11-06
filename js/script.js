@@ -1,20 +1,38 @@
-// Image Loading Optimization - Apple-style aggressive preloading
+// Image Loading Optimization - Apple-style instant loading
 document.addEventListener("DOMContentLoaded", () => {
-	const images = document.querySelectorAll("img[loading='lazy']");
+	// Handle all images - both eager and lazy loaded
+	const allImages = document.querySelectorAll("img");
 	
-	if ("IntersectionObserver" in window) {
-		// Apple uses very aggressive preloading - load images well before they're visible
+	allImages.forEach((img) => {
+		// If image is already loaded, add loaded class immediately
+		if (img.complete && img.naturalHeight !== 0) {
+			img.classList.add("loaded");
+		} else {
+			// Add loaded class when image loads
+			img.addEventListener("load", () => {
+				img.classList.add("loaded");
+			}, { once: true });
+			
+			// Handle error case
+			img.addEventListener("error", () => {
+				console.warn(`Failed to load image: ${img.src}`);
+				img.classList.add("loaded"); // Show placeholder
+			}, { once: true });
+		}
+	});
+	
+	// For lazy-loaded images (like profile photo), use IntersectionObserver
+	const lazyImages = document.querySelectorAll("img[loading='lazy']");
+	
+	if (lazyImages.length > 0 && "IntersectionObserver" in window) {
 		const imageObserver = new IntersectionObserver(
 			(entries, observer) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						const img = entry.target;
 						
-						// Force immediate loading by removing lazy attribute
-						img.removeAttribute("loading");
-						
 						// Add loaded class when image is fully loaded
-						if (img.complete) {
+						if (img.complete && img.naturalHeight !== 0) {
 							img.classList.add("loaded");
 						} else {
 							img.addEventListener("load", () => {
@@ -27,36 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
 				});
 			},
 			{
-				// Apple-style: Start loading 2 screens before visible
-				rootMargin: "200% 0px 200% 0px",
+				// Start loading slightly before visible
+				rootMargin: "100px",
 			}
 		);
 
-		images.forEach((img) => imageObserver.observe(img));
-	} else {
-		// Fallback: load all images immediately
-		images.forEach((img) => {
-			img.removeAttribute("loading");
-			img.addEventListener("load", () => {
-				img.classList.add("loaded");
-			}, { once: true });
-		});
+		lazyImages.forEach((img) => imageObserver.observe(img));
 	}
-	
-	// Preload achievement images on page load for instant display
-	setTimeout(() => {
-		const achievementImages = document.querySelectorAll(".achievement-item img");
-		achievementImages.forEach((img) => {
-			if (!img.complete) {
-				const imgSrc = img.getAttribute("src");
-				const preloadLink = document.createElement("link");
-				preloadLink.rel = "preload";
-				preloadLink.as = "image";
-				preloadLink.href = imgSrc;
-				document.head.appendChild(preloadLink);
-			}
-		});
-	}, 100);
 });
 
 // Dark Mode Toggle
