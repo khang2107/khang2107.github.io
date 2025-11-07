@@ -1,0 +1,20 @@
+/* =========================================
+   FORM COMPONENTS
+   Note: Form styles are primarily in contact.css section
+   ========================================= */
+
+/* Generic form base styles */
+input,
+textarea,
+select {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 2px;
+}

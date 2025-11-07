@@ -1,0 +1,26 @@
+/* =========================================
+   RESET & BASE STYLES
+   ========================================= */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1.47059;
+	color: var(--text-primary);
+	background-color: var(--bg-primary);
+	font-weight: 400;
+	letter-spacing: -0.022em;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+}

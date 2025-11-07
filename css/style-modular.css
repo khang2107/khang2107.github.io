@@ -1,0 +1,35 @@
+/* =========================================
+   MAIN STYLESHEET - MODULAR ARCHITECTURE
+   Portfolio Website by David Khang
+   ========================================= */
+
+/* Base Styles */
+@import url('./base/variables.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+@import url('./base/images.css');
+
+/* Utilities */
+@import url('./utils/helpers.css');
+@import url('./utils/animations.css');
+
+/* Components */
+@import url('./components/navigation.css');
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+@import url('./components/forms.css');
+@import url('./components/modals.css');
+
+/* Sections */
+@import url('./sections/hero.css');
+@import url('./sections/about.css');
+@import url('./sections/skills.css');
+@import url('./sections/achievements.css');
+@import url('./sections/projects.css');
+@import url('./sections/experience.css');
+@import url('./sections/resume.css');
+@import url('./sections/contact.css');
+@import url('./sections/footer.css');
+
+/* Responsive Design */
+@import url('./utils/responsive.css');

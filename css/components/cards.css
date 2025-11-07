@@ -1,0 +1,23 @@
+/* =========================================
+   CARD COMPONENTS
+   Note: Specific card styles are in their respective sections
+   (project-card in projects.css, resume-card in resume.css)
+   ========================================= */
+
+/* Generic card base styles if needed */
+.card {
+	background: white;
+	border-radius: 12px;
+	padding: 2rem;
+	box-shadow: var(--shadow);
+	transition: var(--transition);
+}
+
+.card:hover {
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-2px);
+}
+
+body.dark-mode .card {
+	background: var(--bg-secondary);
+}
