@@ -1,38 +1,5 @@
-/* Form Components */
-.form-group {
-	margin-bottom: 1.5rem;
-}
-
-.form-group input,
-.form-group textarea {
-	width: 100%;
-	padding: 0.875rem 1rem;
-	border: 1px solid var(--border-color);
-	border-radius: 12px;
-	font-family: inherit;
-	font-size: 1rem;
-	transition: var(--transition);
-	background: var(--bg-primary);
-	color: var(--text-primary);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-	outline: none;
-	border-color: var(--primary-color);
-	box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
-}
-
-body.dark-mode .form-group input:focus,
-body.dark-mode .form-group textarea:focus {
-	box-shadow: 0 0 0 4px rgba(41, 151, 255, 0.2);
-}
-
-.form-group textarea {
-	resize: vertical;
-	min-height: 120px;
-}
-
-.contact-form .btn {
-	width: 100%;
-}
+/**
+ * Form Components
+ * Form styles are in pages/contact.css
+ * Contact form specific styling
+ */

@@ -1,4 +1,8 @@
-/* Responsive Design */
+/**
+ * Responsive
+ * Auto-generated from style.css refactoring
+ */
+
 @media (max-width: 968px) {
 	.nav-menu {
 		position: fixed;

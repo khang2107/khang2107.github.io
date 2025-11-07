@@ -1,31 +1,9 @@
-/* Typography */
-body {
-	font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	line-height: 1.47059;
-	color: var(--text-primary);
-	background-color: var(--bg-primary);
-	font-weight: 400;
-	letter-spacing: -0.022em;
-	overflow-x: hidden;
-	-webkit-overflow-scrolling: touch;
-}
+/**
+ * Typography Styles
+ * Currently handled by base reset and component-specific styles
+ */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-weight: 600;
-	line-height: 1.2;
-	color: var(--text-primary);
-}
-
-a {
-	color: var(--primary-color);
-	text-decoration: none;
-}
-
-p {
-	margin-bottom: 1rem;
-}
+/* Typography is defined in:
+ * - base/reset.css for body font
+ * - Individual page files for headings and specific text styles
+ */

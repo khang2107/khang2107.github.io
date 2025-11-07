@@ -1,4 +1,8 @@
-/* Navigation Component */
+/**
+ * Navigation
+ * Auto-generated from style.css refactoring
+ */
+
 .navbar {
 	position: fixed;
 	top: 0;
@@ -67,7 +71,6 @@ body.dark-mode .navbar {
 	width: 100%;
 }
 
-/* Mobile Navigation Toggle */
 .nav-toggle {
 	display: none;
 	flex-direction: column;
@@ -80,8 +83,6 @@ body.dark-mode .navbar {
 	height: 40px;
 	justify-content: center;
 	align-items: center;
-	margin: 0;
-	flex-shrink: 0;
 }
 
 .nav-toggle span {
@@ -132,14 +133,13 @@ body.dark-mode .navbar {
 	font-size: 2rem;
 	color: var(--text-primary);
 	cursor: pointer;
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: var(--transition);
 	width: 45px;
 	height: 45px;
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
 	z-index: 1000;
-	will-change: transform;
 }
 
 .nav-close:hover {
@@ -151,21 +151,12 @@ body.dark-mode .nav-close:hover {
 	background: rgba(255, 255, 255, 0.1);
 }
 
-/* Navigation Controls Wrapper */
-.nav-controls {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 0.75rem;
-	flex-shrink: 0;
-}
-
-/* Dark Mode Toggle Button */
+/* Dark Mode Toggle */
 .dark-mode-toggle {
 	background: rgba(0, 0, 0, 0.04);
 	border: none;
-	width: 40px;
-	height: 40px;
+	width: 36px;
+	height: 36px;
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -174,9 +165,6 @@ body.dark-mode .nav-close:hover {
 	transition: var(--transition);
 	color: var(--text-primary);
 	font-size: 0.875rem;
-	padding: 0;
-	margin: 0;
-	flex-shrink: 0;
 }
 
 .dark-mode-toggle:hover {
@@ -190,27 +178,4 @@ body.dark-mode .dark-mode-toggle {
 
 body.dark-mode .dark-mode-toggle:hover {
 	background: rgba(255, 255, 255, 0.15);
-}
-
-/* Hide/Show dark mode toggle based on screen size */
-@media (min-width: 969px) {
-	.nav-controls .dark-mode-toggle {
-		display: none;
-	}
-	
-	.dark-mode-toggle-menu {
-		display: flex !important;
-		width: 36px;
-		height: 36px;
-	}
-}
-
-@media (max-width: 968px) {
-	.dark-mode-toggle-menu {
-		display: none !important;
-	}
-	
-	.nav-controls .dark-mode-toggle {
-		display: flex;
-	}
 }
