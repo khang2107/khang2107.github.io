@@ -9,34 +9,74 @@ Purpose: help an AI coding agent become productive quickly. Focus on the static 
 
 -   Project type: Single-page static portfolio built with plain HTML, CSS, and vanilla JavaScript. No build system, package manager, or tests in the repo.
 -   Key files:
-    -   `index.html` — single-page structure, navigation anchor links, sections: home, about, skills, projects, experience, resume, contact.
-    -   `js/script.js` — all interactive behaviour: dark mode toggle, mobile nav, smooth scrolling, form handling (client-only), simple animations.
-    -   `css/style.css` — global styles, dark-mode variables, responsive breakpoints and design system variables in `:root`.
+    -   `index.html` — single-page structure, navigation anchor links, sections: home, about, skills, projects, experience, resume, contact. Uses `css/main.css` (modular CSS architecture).
+    -   `js/script.js` — all interactive behaviour: dark mode toggle (dual buttons for mobile/desktop), mobile nav with optimized animations, smooth scrolling, form handling (client-only), image loading optimization, IntersectionObserver for lazy loading.
+    -   `css/main.css` — **Entry point** that imports modular CSS following ITCSS methodology (Settings → Base → Layout → Components → Pages → Utilities).
+    -   `css/` structure:
+        -   `base/` — variables.css (design tokens), reset.css, typography.css, images.css (loading optimization)
+        -   `layout/` — container.css, sections.css, footer.css
+        -   `components/` — navigation.css, buttons.css, modals.css, cards.css, forms.css
+        -   `pages/` — hero.css, about.css, skills.css, achievements.css, projects.css, experience.css, resume.css, contact.css
+        -   `utilities/` — animations.css, responsive.css
     -   `image/` — media assets referenced by `index.html` (photos, project thumbnails).
 
 What to change and how
 
--   Make minimal, localized edits. Prefer small, atomic PRs that modify only the files required for the feature/bugfix (usually `index.html`, `js/script.js`, and/or `css/style.css`).
--   Preserve the existing responsive classes, CSS custom properties, and the dark-mode variable pattern (body.dark-mode). When adding styles, add variables to `:root` and their dark-mode counterparts in `body.dark-mode`.
+-   Make minimal, localized edits. Prefer small, atomic PRs that modify only the files required for the feature/bugfix.
+-   **CSS Architecture**: Modular ITCSS structure. Edit the appropriate file:
+    -   Design tokens (colors, shadows, transitions) → `css/base/variables.css`
+    -   Component styles (buttons, nav, modals) → `css/components/*.css`
+    -   Page-specific styles → `css/pages/*.css`
+    -   Responsive breakpoints → `css/utilities/responsive.css`
+    -   Never edit `css/style-backup.css` or `css/style-original.css.bak` (legacy backups)
+-   Preserve CSS custom properties pattern: add variables to `css/base/variables.css` in both `:root` and `body.dark-mode` sections.
 -   When modifying JavaScript, keep all behaviour in `js/script.js` unless adding a new widget that warrants an adjacent file under `js/`. Keep code ES6+, avoid frameworks/polyfills.
 -   Do not introduce a build step or package manager unless the user explicitly requests it.
 
 Conventions & patterns to follow
 
--   Dark mode: toggled by adding/removing `dark-mode` on `body`; icons switch between `fa-moon` and `fa-sun` in `js/script.js`. Use CSS custom properties to adapt colours.
--   Navigation: mobile menu toggles `nav-menu` class `active`; the hamburger button gets `active`. When altering markup, maintain `id` attributes used by `js/script.js` (e.g. `navToggle`, `navMenu`, `navClose`, `navLink`, `darkModeToggle`).
--   Animations: IntersectionObserver is used for reveal animations. Prefer reusing the existing observer logic or adding new selectors observed in `js/script.js`.
--   Contact form: client-only. The form currently prevents default submit and shows an alert. If implementing a backend integration, keep the current UX (reset and success message) and ensure no new third-party keys are committed.
+-   **Dark mode**: toggled by adding/removing `dark-mode` on `body`; two toggle buttons exist:
+    -   `#darkModeToggle` — visible on mobile next to hamburger (in `.nav-controls`)
+    -   `#darkModeToggleMenu` — visible on desktop in nav menu
+    -   Both buttons sync icons between `fa-moon` and `fa-sun`, controlled by `toggleDarkMode()` function in `js/script.js`
+    -   Theme persisted in `localStorage` as `theme: "dark"` or `theme: "light"`
+-   **Navigation**: 
+    -   Mobile: hamburger menu (`#navToggle`) opens full-screen overlay (`#navMenu.active`)
+    -   Uses `requestAnimationFrame` for smooth 60fps animations
+    -   Body scroll locked when menu open (`body.style.overflow = "hidden"`)
+    -   Performance optimized: GPU acceleration (`transform: translateZ(0)`), reduced blur on mobile (`blur(10px)`), `contain: layout style paint`
+    -   Close button (`#navClose`) and nav links auto-close menu via `closeMenu()` function
+-   **Performance patterns**:
+    -   Image loading: `loading="eager"` for above-fold, `loading="lazy"` for below-fold
+    -   IntersectionObserver with `rootMargin: "100px"` for lazy images
+    -   Shimmer loading animation in `css/base/images.css` (`.achievement-item::before`)
+    -   Preloading critical resources in `<head>` (CSS, hero image)
+-   **Animations**: IntersectionObserver is used for reveal animations. Prefer reusing the existing observer logic or adding new selectors observed in `js/script.js`.
+-   **Contact form**: client-only. The form currently prevents default submit and shows an alert. If implementing a backend integration, keep the current UX (reset and success message) and ensure no new third-party keys are committed.
 
 Common tasks and examples
 
--   Add a new section: edit `index.html` to add the section's markup and add a link in the navigation with class "nav-link" that points to the section's fragment. Add any new styles to `css/style.css` and small JS in `js/script.js` only if required for animation or interaction.
+-   **Add a new section**: edit `index.html` to add the section's markup and add a link in the navigation with class "nav-link" that points to the section's fragment. Add new styles to appropriate file in `css/pages/`. Add small JS in `js/script.js` only if required for animation or interaction.
+
+-   **Modify component styling**: 
+    -   Buttons → `css/components/buttons.css`
+    -   Navigation → `css/components/navigation.css`
+    -   Modals → `css/components/modals.css`
+
+-   **Add responsive breakpoint**: Edit `css/utilities/responsive.css`, which contains all `@media` queries organized by screen size.
+
+-   **Modify colors/theme**: Edit `css/base/variables.css`, updating both `:root` (light mode) and `body.dark-mode` (dark mode).
 
 Example: add a small CTA modal
 
 -   HTML: add modal markup near the end of `index.html` (hidden by default).
--   CSS: add a `.modal` block to `css/style.css` and reuse variables like `--bg-primary`.
--   JS: add event listeners in `js/script.js` to toggle the modal's visibility and `aria-hidden`. Follow existing toggle patterns (e.g. toggling `classList` on elements).
+-   CSS: add modal styles to `css/components/modals.css`, reusing variables like `--bg-primary`, `--shadow-lg`.
+-   JS: add event listeners in `js/script.js` to toggle the modal's visibility and `aria-hidden`. Follow existing toggle patterns (e.g. `requestAnimationFrame(() => element.classList.toggle('active'))`).
+
+Example: optimize Experience section for large screens
+
+-   CSS: Edit `css/pages/experience.css` for base styles, then add responsive overrides in `css/utilities/responsive.css` using breakpoints like `@media (min-width: 1401px)`.
+-   Pattern: Mobile-first base styles, progressively enhanced for tablet (969px-1400px), large (1401px-1920px), and ultra-wide (>1920px) screens.
 
 Safety and repository rules
 
@@ -65,7 +105,18 @@ Files to reference while coding
 
 -   `index.html` — structure and anchor ids
 -   `js/script.js` — behaviour and event targets
--   `css/style.css` — design tokens, variables, breakpoints
+-   `css/main.css` — import order and architecture overview
+-   `css/base/variables.css` — design tokens (colors, shadows, transitions)
+-   `css/utilities/responsive.css` — all breakpoints and mobile optimizations
+-   `css/components/navigation.css` — navbar and menu patterns
+-   `css/pages/*.css` — section-specific styles (hero, about, skills, etc.)
+
+CSS Architecture Quick Reference
+
+-   **ITCSS layers** (low to high specificity): Settings → Base → Layout → Components → Pages → Utilities
+-   **Finding styles**: Use grep to search: `grep -r ".my-class" css/` or check specific layer folder
+-   **Import order matters**: Variables must load before components; responsive utilities load last
+-   **Performance**: GPU-accelerated animations (`transform`, `opacity`), reduced blur on mobile, lazy loading with IntersectionObserver
 
 After making changes
 
