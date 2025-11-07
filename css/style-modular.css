@@ -1,35 +1,46 @@
-/* =========================================
-   MAIN STYLESHEET - MODULAR ARCHITECTURE
-   Portfolio Website by David Khang
-   ========================================= */
+/**
+ * Main Stylesheet - Portfolio Website
+ * This file imports all modular CSS files for better maintainability
+ * Following ITCSS (Inverted Triangle CSS) architecture
+ */
 
-/* Base Styles */
-@import url('./base/variables.css');
-@import url('./base/reset.css');
-@import url('./base/typography.css');
-@import url('./base/images.css');
+/* ==========================================================================
+   BASE LAYER - Reset, variables, and typography
+   ========================================================================== */
+@import url('base/reset.css');
+@import url('base/variables.css');
+@import url('themes/dark-mode.css');
+@import url('base/typography.css');
 
-/* Utilities */
-@import url('./utils/helpers.css');
-@import url('./utils/animations.css');
+/* ==========================================================================
+   LAYOUT LAYER - Major layout components
+   ========================================================================== */
+@import url('layout/container.css');
+@import url('layout/sections.css');
 
-/* Components */
-@import url('./components/navigation.css');
-@import url('./components/buttons.css');
-@import url('./components/cards.css');
-@import url('./components/forms.css');
-@import url('./components/modals.css');
+/* ==========================================================================
+   COMPONENTS LAYER - Reusable UI components
+   ========================================================================== */
+@import url('components/navigation.css');
+@import url('components/buttons.css');
+@import url('components/cards.css');
+@import url('components/forms.css');
+@import url('components/modals.css');
 
-/* Sections */
-@import url('./sections/hero.css');
-@import url('./sections/about.css');
-@import url('./sections/skills.css');
-@import url('./sections/achievements.css');
-@import url('./sections/projects.css');
-@import url('./sections/experience.css');
-@import url('./sections/resume.css');
-@import url('./sections/contact.css');
-@import url('./sections/footer.css');
+/* ==========================================================================
+   PAGES LAYER - Page-specific styles
+   ========================================================================== */
+@import url('pages/hero.css');
+@import url('pages/about.css');
+@import url('pages/skills.css');
+@import url('pages/achievements.css');
+@import url('pages/projects.css');
+@import url('pages/experience.css');
+@import url('pages/resume.css');
+@import url('pages/contact.css');
 
-/* Responsive Design */
-@import url('./utils/responsive.css');
+/* ==========================================================================
+   UTILITIES LAYER - Animations and responsive styles
+   ========================================================================== */
+@import url('utilities/animations.css');
+@import url('utilities/responsive.css');

@@ -215,6 +215,3 @@ body.dark-mode .hero-photo:hover {
 	transform: translateX(-50%);
 	animation: scrollDown 2s infinite;
 }
-
-/* Sections */
-section {

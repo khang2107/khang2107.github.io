@@ -1,7 +1,4 @@
-/* =========================================
-   NAVIGATION COMPONENT
-   ========================================= */
-
+/* Navigation Component */
 .navbar {
 	position: fixed;
 	top: 0;
@@ -15,7 +12,7 @@
 }
 
 body.dark-mode .navbar {
-	background: rgba(29, 29, 29, 0.72);
+	background: rgba(29, 29, 31, 0.72);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -32,14 +29,6 @@ body.dark-mode .navbar {
 	color: var(--text-primary);
 	text-decoration: none;
 	letter-spacing: -0.02em;
-}
-
-.nav-controls {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 0.75rem;
-	flex-shrink: 0;
 }
 
 .nav-menu {
@@ -78,7 +67,7 @@ body.dark-mode .navbar {
 	width: 100%;
 }
 
-/* Hamburger Menu */
+/* Mobile Navigation Toggle */
 .nav-toggle {
 	display: none;
 	flex-direction: column;
@@ -162,7 +151,16 @@ body.dark-mode .nav-close:hover {
 	background: rgba(255, 255, 255, 0.1);
 }
 
-/* Dark Mode Toggle */
+/* Navigation Controls Wrapper */
+.nav-controls {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.75rem;
+	flex-shrink: 0;
+}
+
+/* Dark Mode Toggle Button */
 .dark-mode-toggle {
 	background: rgba(0, 0, 0, 0.04);
 	border: none;
@@ -194,7 +192,7 @@ body.dark-mode .dark-mode-toggle:hover {
 	background: rgba(255, 255, 255, 0.15);
 }
 
-/* Hide the nav-controls dark mode toggle on desktop, show the menu one */
+/* Hide/Show dark mode toggle based on screen size */
 @media (min-width: 969px) {
 	.nav-controls .dark-mode-toggle {
 		display: none;
@@ -207,7 +205,6 @@ body.dark-mode .dark-mode-toggle:hover {
 	}
 }
 
-/* Hide the menu dark mode toggle on mobile, show the nav-controls one */
 @media (max-width: 968px) {
 	.dark-mode-toggle-menu {
 		display: none !important;

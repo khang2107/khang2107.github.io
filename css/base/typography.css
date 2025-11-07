@@ -1,63 +1,31 @@
-/* =========================================
-   TYPOGRAPHY
-   ========================================= */
-
-.section-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-bottom: 1rem;
+/* Typography */
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1.47059;
 	color: var(--text-primary);
-	letter-spacing: -0.03em;
+	background-color: var(--bg-primary);
+	font-weight: 400;
+	letter-spacing: -0.022em;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
 }
 
-.section-subtitle {
-	color: var(--text-secondary);
-	font-size: 1.125rem;
-	margin-bottom: 3rem;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 600;
+	line-height: 1.2;
+	color: var(--text-primary);
 }
 
-.btn {
-	display: inline-block;
-	padding: 0.875rem 2rem;
-	background: var(--primary-color);
-	color: white;
-	border: none;
-	border-radius: 980px;
-	font-weight: 500;
-	font-size: 0.875rem;
-	cursor: pointer;
+a {
+	color: var(--primary-color);
 	text-decoration: none;
-	transition: var(--transition);
-	letter-spacing: -0.01em;
 }
 
-.btn:hover {
-	background: var(--secondary-color);
-	transform: translateY(-2px);
-	box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3);
-}
-
-.btn-secondary {
-	background: transparent;
-	color: var(--primary-color);
-	border: 2px solid var(--primary-color);
-}
-
-.btn-secondary:hover {
-	background: var(--primary-color);
-	color: white;
-}
-
-body.dark-mode .btn:hover {
-	box-shadow: 0 8px 20px rgba(41, 151, 255, 0.4);
-}
-
-body.dark-mode .btn-secondary {
-	color: var(--primary-color);
-	border-color: var(--primary-color);
-}
-
-body.dark-mode .btn-secondary:hover {
-	background: var(--primary-color);
-	color: white;
+p {
+	margin-bottom: 1rem;
 }
