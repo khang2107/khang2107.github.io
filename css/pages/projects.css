@@ -5,7 +5,12 @@
 
 .projects {
 	background: var(--bg-primary);
-	padding-bottom: 5rem;
+	overflow: hidden;
+}
+
+/* Subtle section background to help cards stand out */
+body:not(.dark-mode) .projects {
+	background: #fafafa;
 }
 
 .projects .section-header {
@@ -196,33 +201,29 @@ body.dark-mode .projects-nav-mobile-btn {
 }
 
 .project-card {
-	background: var(--card-bg);
-	border-radius: 20px;
+	background: white;
+	border-radius: 18px;
 	overflow: hidden;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+	box-shadow: var(--shadow-card);
 	border: 1px solid var(--border-subtle);
-	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	width: 100%;
-	height: 100%;
+	transition: var(--transition);
 	display: flex;
 	flex-direction: column;
-	will-change: transform;
-	backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
+	height: 100%;
 }
 
 body.dark-mode .project-card {
-	background: var(--card-bg);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+	background: #2d2d30;
+	border-color: var(--border-subtle);
 }
 
 .project-card-link:hover .project-card {
-	transform: translateY(-12px);
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.06);
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
 }
 
 body.dark-mode .project-card-link:hover .project-card {
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 .project-image {

@@ -7,6 +7,11 @@
 	background: var(--bg-primary);
 }
 
+/* Subtle section background to help cards stand out */
+body:not(.dark-mode) .skills {
+	background: #fafafa;
+}
+
 .skills-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -14,7 +19,7 @@
 }
 
 .skill-category {
-	background: var(--card-bg);
+	background: white;
 	padding: 1.5rem;
 	border-radius: 16px;
 	box-shadow: var(--shadow-card);
@@ -22,17 +27,14 @@
 	transition: var(--transition);
 }
 
-body.dark-mode .skill-category {
-	background: var(--card-bg);
-}
-
 .skill-category:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
 }
 
-body.dark-mode .skill-category:hover {
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+body.dark-mode .skill-category {
+	background: #2d2d30;
+	border-color: var(--border-subtle);
 }
 
 .skill-category h3 {

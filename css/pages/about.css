@@ -69,17 +69,14 @@
 	transition: var(--transition);
 }
 
-body.dark-mode .stat {
-	background: #1c1c1e;
-}
-
 .stat:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
 }
 
-body.dark-mode .stat:hover {
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+body.dark-mode .stat {
+	background: #2d2d30;
+	border-color: var(--border-subtle);
 }
 
 .stat h3 {

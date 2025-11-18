@@ -7,6 +7,11 @@
 	background: var(--bg-primary);
 }
 
+/* Subtle section background to help cards stand out */
+body:not(.dark-mode) .resume {
+	background: #fafafa;
+}
+
 .resume-content {
 	display: flex;
 	justify-content: center;
@@ -15,7 +20,7 @@
 }
 
 .resume-card {
-	background: var(--card-bg);
+	background: white;
 	padding: 2.5rem;
 	border-radius: 16px;
 	box-shadow: var(--shadow-card);
@@ -27,16 +32,13 @@
 }
 
 body.dark-mode .resume-card {
-	background: var(--card-bg);
+	background: #2d2d30;
+	border-color: var(--border-subtle);
 }
 
 .resume-card:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.06);
-}
-
-body.dark-mode .resume-card:hover {
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+	box-shadow: var(--shadow-lg);
 }
 
 .resume-icon {
