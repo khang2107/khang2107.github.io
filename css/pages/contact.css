@@ -77,14 +77,15 @@ body.dark-mode .contact-item i {
 
 .contact-form {
 	order: 2;
-	background: white;
+	background: var(--card-bg);
 	padding: 1.75rem;
 	border-radius: 16px;
-	box-shadow: var(--shadow);
+	box-shadow: var(--shadow-card);
+	border: 1px solid var(--border-subtle);
 }
 
 body.dark-mode .contact-form {
-	background: #2d2d30;
+	background: var(--card-bg);
 }
 
 .form-group {
