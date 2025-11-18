@@ -54,7 +54,7 @@ Conventions & patterns to follow
     -   CSS: `scroll-snap-type: x mandatory` with `scroll-snap-align: center` on cards
     -   Navigation arrows (`.projects-nav-btn`) show/hide based on scroll position
     -   JavaScript handles smooth scrolling between cards via `scrollIntoView()`
-    -   Mobile: arrows hidden, touch-optimized snap scrolling enabled
+    -   Mobile: bottom-right arrows (`.projects-nav-mobile-btn`) appear, desktop side arrows hidden
 -   **Animations**: IntersectionObserver is used for reveal animations. Prefer reusing the existing observer logic or adding new selectors observed in `js/script.js`.
 -   **Contact form**: submits to Web3Forms API. Form handler in `js/script.js` uses `fetch()` with async/await, shows loading state during submission, resets form on success. Error handling logs to console and shows user-friendly alerts.
 

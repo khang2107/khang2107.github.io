@@ -192,8 +192,10 @@ window.addEventListener("scroll", handleScroll, { passive: true });
 const projectsScroll = document.getElementById("projectsScroll");
 const projectsNavPrev = document.querySelector(".projects-nav-prev");
 const projectsNavNext = document.querySelector(".projects-nav-next");
+const projectsNavMobilePrev = document.querySelector(".projects-nav-mobile-prev");
+const projectsNavMobileNext = document.querySelector(".projects-nav-mobile-next");
 
-if (projectsScroll && projectsNavPrev && projectsNavNext) {
+if (projectsScroll) {
 	const projectCards = projectsScroll.querySelectorAll(".project-card-link");
 	
 	// Function to get current card index
@@ -216,41 +218,67 @@ if (projectsScroll && projectsNavPrev && projectsNavNext) {
 		}
 	}
 	
-	// Update button visibility based on scroll position
+	// Update button states based on scroll position
 	function updateNavButtons() {
 		const currentIndex = getCurrentCardIndex();
 		const maxIndex = projectCards.length - 1;
 		
-		// Show/hide previous button
-		if (currentIndex <= 0) {
-			projectsNavPrev.classList.remove("visible");
-		} else {
-			projectsNavPrev.classList.add("visible");
+		// Desktop buttons (if they exist)
+		if (projectsNavPrev && projectsNavNext) {
+			// Show/hide previous button
+			if (currentIndex <= 0) {
+				projectsNavPrev.classList.remove("visible");
+			} else {
+				projectsNavPrev.classList.add("visible");
+			}
+			
+			// Show/hide next button
+			if (currentIndex >= maxIndex) {
+				projectsNavNext.classList.remove("visible");
+			} else {
+				projectsNavNext.classList.add("visible");
+			}
 		}
 		
-		// Show/hide next button
-		if (currentIndex >= maxIndex) {
-			projectsNavNext.classList.remove("visible");
-		} else {
-			projectsNavNext.classList.add("visible");
+		// Mobile buttons (if they exist)
+		if (projectsNavMobilePrev && projectsNavMobileNext) {
+			// Disable/enable previous button
+			projectsNavMobilePrev.disabled = currentIndex <= 0;
+			
+			// Disable/enable next button
+			projectsNavMobileNext.disabled = currentIndex >= maxIndex;
 		}
 	}
 	
-	// Previous button click
-	projectsNavPrev.addEventListener("click", () => {
+	// Navigation function
+	function navigateProjects(direction) {
 		const currentIndex = getCurrentCardIndex();
-		if (currentIndex > 0) {
+		if (direction === "prev" && currentIndex > 0) {
 			scrollToCard(currentIndex - 1);
-		}
-	});
-	
-	// Next button click
-	projectsNavNext.addEventListener("click", () => {
-		const currentIndex = getCurrentCardIndex();
-		if (currentIndex < projectCards.length - 1) {
+		} else if (direction === "next" && currentIndex < projectCards.length - 1) {
 			scrollToCard(currentIndex + 1);
 		}
-	});
+	}
+	
+	// Desktop previous button
+	if (projectsNavPrev) {
+		projectsNavPrev.addEventListener("click", () => navigateProjects("prev"));
+	}
+	
+	// Desktop next button
+	if (projectsNavNext) {
+		projectsNavNext.addEventListener("click", () => navigateProjects("next"));
+	}
+	
+	// Mobile previous button
+	if (projectsNavMobilePrev) {
+		projectsNavMobilePrev.addEventListener("click", () => navigateProjects("prev"));
+	}
+	
+	// Mobile next button
+	if (projectsNavMobileNext) {
+		projectsNavMobileNext.addEventListener("click", () => navigateProjects("next"));
+	}
 	
 	// Update buttons on scroll
 	let projectsScrollTimeout;
