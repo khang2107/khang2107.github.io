@@ -10,11 +10,7 @@
 .contact-content {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 4rem;
-}
-
-.contact-form {
-	order: 2;
+	gap: 3rem;
 }
 
 .contact-info {
@@ -22,21 +18,22 @@
 }
 
 .contact-info h3 {
-	font-size: 1.75rem;
-	margin-bottom: 1rem;
+	font-size: 1.5rem;
+	margin-bottom: 0.875rem;
 	color: var(--text-primary);
 }
 
 .contact-info > p {
 	color: var(--text-secondary);
-	margin-bottom: 2rem;
-	line-height: 1.8;
+	margin-bottom: 1.5rem;
+	line-height: 1.7;
+	font-size: 0.9375rem;
 }
 
 .contact-items {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 1.25rem;
 }
 
 .contact-item {
@@ -46,15 +43,15 @@
 }
 
 .contact-item i {
-	width: 50px;
-	height: 50px;
+	width: 44px;
+	height: 44px;
 	background: var(--text-primary);
-	border-radius: 12px;
+	border-radius: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: white;
-	font-size: 1.125rem;
+	font-size: 1rem;
 	flex-shrink: 0;
 }
 
@@ -79,9 +76,10 @@ body.dark-mode .contact-item i {
 }
 
 .contact-form {
+	order: 2;
 	background: white;
-	padding: 2rem;
-	border-radius: 18px;
+	padding: 1.75rem;
+	border-radius: 16px;
 	box-shadow: var(--shadow);
 }
 
@@ -90,7 +88,7 @@ body.dark-mode .contact-form {
 }
 
 .form-group {
-	margin-bottom: 1.5rem;
+	margin-bottom: 1.25rem;
 }
 
 .form-group input,

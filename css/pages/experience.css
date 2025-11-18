@@ -77,8 +77,8 @@ body.dark-mode .timeline-item:hover .timeline-icon {
 
 .timeline-content {
 	background: white;
-	padding: 2.5rem;
-	border-radius: 20px;
+	padding: 1.75rem;
+	border-radius: 16px;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	will-change: transform;
@@ -101,8 +101,8 @@ body.dark-mode .timeline-item:hover .timeline-content {
 }
 
 .timeline-content h3 {
-	font-size: 1.5rem;
-	margin-bottom: 0.625rem;
+	font-size: 1.25rem;
+	margin-bottom: 0.5rem;
 	color: var(--text-primary);
 	font-weight: 700;
 	letter-spacing: -0.02em;
@@ -111,20 +111,21 @@ body.dark-mode .timeline-item:hover .timeline-content {
 
 .timeline-content h4 {
 	color: var(--text-secondary);
-	margin-bottom: 0.625rem;
+	margin-bottom: 0.5rem;
 	font-weight: 600;
-	font-size: 1.0625rem;
+	font-size: 1rem;
 }
 
 .timeline-date {
 	color: var(--text-secondary);
-	font-size: 0.9375rem;
-	margin-bottom: 1.25rem;
+	font-size: 0.875rem;
+	margin-bottom: 1rem;
 	font-weight: 500;
 	display: inline-block;
 }
 
 .timeline-content p:last-child {
-	line-height: 1.7;
+	line-height: 1.6;
 	color: var(--text-secondary);
+	font-size: 0.9375rem;
 }

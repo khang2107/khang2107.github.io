@@ -54,40 +54,40 @@
 	}
 
 	.hero-photo {
-		width: 140px;
-		height: 140px;
+		width: 120px;
+		height: 120px;
 		border-width: 4px;
 	}
 
 	.hero-image {
-		margin-bottom: 1.5rem;
+		margin-bottom: 1.25rem;
 	}
 
 	.hero-greeting {
-		font-size: 1rem;
+		font-size: 0.9375rem;
 	}
 
 	.hero-title {
-		font-size: 2.5rem;
+		font-size: 2.25rem;
 	}
 
 	.hero-subtitle {
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 	}
 
 	.hero-description {
-		font-size: 1.0625rem;
+		font-size: 1rem;
 	}
 
 	.hero-buttons {
-		gap: 0.75rem;
+		gap: 0.625rem;
 	}
 
 	.hero-buttons .btn {
-		padding: 0.6875rem 1.375rem;
-		font-size: 1rem;
+		padding: 0.625rem 1.25rem;
+		font-size: 0.9375rem;
 		flex: 0 1 auto;
-		min-width: 140px;
+		min-width: 130px;
 		max-width: none;
 	}
 
@@ -97,6 +97,8 @@
 	}
 
 	.profile-photo {
+		width: 220px;
+		height: 220px;
 		margin: 0 auto;
 		display: block;
 	}
@@ -141,13 +143,13 @@
 	.projects-scroll {
 		padding-left: 2rem;
 		padding-right: 2rem;
-		gap: 1.25rem;
+		gap: 1rem;
 		scroll-padding-left: 2rem;
 	}
 
 	.project-card-link {
-		flex: 0 0 340px;
-		width: 340px;
+		flex: 0 0 300px;
+		width: 300px;
 	}
 
 	.projects-nav {
@@ -214,25 +216,25 @@
 	.timeline-icon {
 		grid-column: 1;
 		grid-row: 1;
-		width: 48px;
-		height: 48px;
-		font-size: 1.125rem;
-	}
-
-	.timeline-content {
-		padding: 2rem;
-	}
-
-	.timeline-content h3 {
-		font-size: 1.25rem;
-	}
-
-	.timeline-content h4 {
+		width: 44px;
+		height: 44px;
 		font-size: 1rem;
 	}
 
+	.timeline-content {
+		padding: 1.5rem;
+	}
+
+	.timeline-content h3 {
+		font-size: 1.125rem;
+	}
+
+	.timeline-content h4 {
+		font-size: 0.9375rem;
+	}
+
 	.timeline-date {
-		font-size: 0.875rem;
+		font-size: 0.8125rem;
 	}
 
 	.footer-content {
@@ -245,15 +247,15 @@
 /* Medium Mobile Devices */
 @media (max-width: 768px) {
 	.hero-buttons .btn {
-		padding: 0.6875rem 1.25rem;
-		font-size: 1rem;
-		min-width: 135px;
+		padding: 0.625rem 1.125rem;
+		font-size: 0.9375rem;
+		min-width: 125px;
 	}
 
 	.resume-buttons .btn {
-		padding: 0.6875rem 1.25rem;
-		font-size: 1rem;
-		min-width: 125px;
+		padding: 0.625rem 1.125rem;
+		font-size: 0.9375rem;
+		min-width: 115px;
 	}
 }
 
@@ -280,12 +282,12 @@
 	}
 
 	.project-card-link {
-		flex: 0 0 300px;
-		width: 300px;
+		flex: 0 0 280px;
+		width: 280px;
 	}
 
 	.project-image {
-		height: 180px;
+		height: 170px;
 	}
 
 	.project-link {
@@ -368,9 +370,14 @@
 	}
 
 	.hero-photo {
-		width: 120px;
-		height: 120px;
+		width: 100px;
+		height: 100px;
 		border-width: 3px;
+	}
+
+	.profile-photo {
+		width: 200px;
+		height: 200px;
 	}
 
 	.hero-image {
@@ -415,7 +422,7 @@
 	}
 
 	.section-title {
-		font-size: 2rem;
+		font-size: 1.75rem;
 	}
 
 	.achievements-grid {
@@ -500,7 +507,7 @@
 	}
 
 	.timeline-content {
-		padding: 2.75rem;
+		padding: 2rem;
 	}
 }
 
@@ -515,11 +522,11 @@
 	}
 
 	.timeline-content {
-		padding: 3rem;
+		padding: 2.25rem;
 	}
 
 	.timeline-content h3 {
-		font-size: 1.625rem;
+		font-size: 1.375rem;
 	}
 }
 
