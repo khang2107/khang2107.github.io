@@ -50,6 +50,10 @@
 	pointer-events: auto;
 	opacity: 0;
 	visibility: hidden;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 body.dark-mode .projects-nav-btn {
@@ -77,6 +81,15 @@ body.dark-mode .projects-nav-btn:hover {
 	pointer-events: none;
 }
 
+.projects-nav-btn:focus {
+	outline: none;
+}
+
+.projects-nav-btn:focus-visible {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 2px;
+}
+
 /* Mobile Navigation Arrows - Bottom Right Position */
 .projects-nav-mobile {
 	display: none;
@@ -100,6 +113,10 @@ body.dark-mode .projects-nav-btn:hover {
 	font-size: 1rem;
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 body.dark-mode .projects-nav-mobile-btn {
@@ -114,6 +131,15 @@ body.dark-mode .projects-nav-mobile-btn {
 .projects-nav-mobile-btn:disabled {
 	opacity: 0.3;
 	cursor: not-allowed;
+}
+
+.projects-nav-mobile-btn:focus {
+	outline: none;
+}
+
+.projects-nav-mobile-btn:focus-visible {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 2px;
 }
 
 .projects-wrapper::after {

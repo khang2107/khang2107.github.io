@@ -252,32 +252,58 @@ if (projectsScroll) {
 	
 	// Navigation function
 	function navigateProjects(direction) {
+		// Save current scroll position
+		const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+		
 		const currentIndex = getCurrentCardIndex();
 		if (direction === "prev" && currentIndex > 0) {
 			scrollToCard(currentIndex - 1);
 		} else if (direction === "next" && currentIndex < projectCards.length - 1) {
 			scrollToCard(currentIndex + 1);
 		}
+		
+		// Restore scroll position after a brief delay
+		setTimeout(() => {
+			window.scrollTo(0, currentScrollY);
+		}, 0);
 	}
 	
 	// Desktop previous button
 	if (projectsNavPrev) {
-		projectsNavPrev.addEventListener("click", () => navigateProjects("prev"));
+		projectsNavPrev.addEventListener("click", (e) => {
+			e.preventDefault();
+			navigateProjects("prev");
+		});
 	}
 	
 	// Desktop next button
 	if (projectsNavNext) {
-		projectsNavNext.addEventListener("click", () => navigateProjects("next"));
+		projectsNavNext.addEventListener("click", (e) => {
+			e.preventDefault();
+			navigateProjects("next");
+		});
 	}
 	
 	// Mobile previous button
 	if (projectsNavMobilePrev) {
-		projectsNavMobilePrev.addEventListener("click", () => navigateProjects("prev"));
+		projectsNavMobilePrev.addEventListener("click", (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			navigateProjects("prev");
+			// Prevent focus from scrolling page
+			projectsNavMobilePrev.blur();
+		});
 	}
 	
 	// Mobile next button
 	if (projectsNavMobileNext) {
-		projectsNavMobileNext.addEventListener("click", () => navigateProjects("next"));
+		projectsNavMobileNext.addEventListener("click", (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			navigateProjects("next");
+			// Prevent focus from scrolling page
+			projectsNavMobileNext.blur();
+		});
 	}
 	
 	// Update buttons on scroll
