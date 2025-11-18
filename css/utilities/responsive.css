@@ -472,11 +472,11 @@
 /* Large Desktop Screens - Expand Experience section */
 @media (min-width: 1401px) {
 	.timeline {
-		max-width: 1200px;
+		max-width: 2000px;
 	}
 
 	.timeline-item {
-		gap: 3rem;
+		gap: 1rem;
 	}
 
 	.timeline-content {
@@ -487,11 +487,11 @@
 /* Ultra-Wide Screens - Maximum expansion */
 @media (min-width: 1601px) {
 	.timeline {
-		max-width: 1400px;
+		max-width: 2000px;
 	}
 
 	.timeline-item {
-		gap: 3.5rem;
+		gap: 1rem;
 	}
 
 	.timeline-content {
