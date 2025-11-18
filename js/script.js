@@ -188,7 +188,87 @@ function handleScroll() {
 
 window.addEventListener("scroll", handleScroll, { passive: true });
 
-// Contact Form Handling
+// Projects Horizontal Scroll Navigation (Apple-style)
+const projectsScroll = document.getElementById("projectsScroll");
+const projectsNavPrev = document.querySelector(".projects-nav-prev");
+const projectsNavNext = document.querySelector(".projects-nav-next");
+
+if (projectsScroll && projectsNavPrev && projectsNavNext) {
+	const projectCards = projectsScroll.querySelectorAll(".project-card-link");
+	
+	// Function to get current card index
+	function getCurrentCardIndex() {
+		const scrollLeft = projectsScroll.scrollLeft;
+		const cardWidth = projectCards[0].offsetWidth;
+		const gap = parseFloat(getComputedStyle(projectsScroll).gap);
+		return Math.round(scrollLeft / (cardWidth + gap));
+	}
+	
+	// Function to scroll to specific card
+	function scrollToCard(index) {
+		const card = projectCards[index];
+		if (card) {
+			card.scrollIntoView({
+				behavior: "smooth",
+				block: "nearest",
+				inline: "center"
+			});
+		}
+	}
+	
+	// Update button visibility based on scroll position
+	function updateNavButtons() {
+		const currentIndex = getCurrentCardIndex();
+		const maxIndex = projectCards.length - 1;
+		
+		// Show/hide previous button
+		if (currentIndex <= 0) {
+			projectsNavPrev.classList.remove("visible");
+		} else {
+			projectsNavPrev.classList.add("visible");
+		}
+		
+		// Show/hide next button
+		if (currentIndex >= maxIndex) {
+			projectsNavNext.classList.remove("visible");
+		} else {
+			projectsNavNext.classList.add("visible");
+		}
+	}
+	
+	// Previous button click
+	projectsNavPrev.addEventListener("click", () => {
+		const currentIndex = getCurrentCardIndex();
+		if (currentIndex > 0) {
+			scrollToCard(currentIndex - 1);
+		}
+	});
+	
+	// Next button click
+	projectsNavNext.addEventListener("click", () => {
+		const currentIndex = getCurrentCardIndex();
+		if (currentIndex < projectCards.length - 1) {
+			scrollToCard(currentIndex + 1);
+		}
+	});
+	
+	// Update buttons on scroll
+	let projectsScrollTimeout;
+	projectsScroll.addEventListener("scroll", () => {
+		clearTimeout(projectsScrollTimeout);
+		projectsScrollTimeout = setTimeout(updateNavButtons, 100);
+	}, { passive: true });
+	
+	// Initial button state
+	updateNavButtons();
+	
+	// Update on window resize
+	window.addEventListener("resize", () => {
+		updateNavButtons();
+	}, { passive: true });
+}
+
+// Contact Form Handler
 const contactForm = document.getElementById("contactForm");
 
 contactForm.addEventListener("submit", async (e) => {

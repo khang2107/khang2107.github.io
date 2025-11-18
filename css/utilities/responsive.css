@@ -142,11 +142,16 @@
 		padding-left: 2rem;
 		padding-right: 2rem;
 		gap: 1.25rem;
+		scroll-padding-left: 2rem;
 	}
 
 	.project-card-link {
 		flex: 0 0 340px;
 		width: 340px;
+	}
+
+	.projects-nav {
+		display: none;
 	}
 
 	.project-image {
@@ -257,6 +262,7 @@
 		padding-left: 1rem;
 		padding-right: 1rem;
 		gap: 1rem;
+		scroll-padding-left: 1rem;
 	}
 
 	.project-card-link {
