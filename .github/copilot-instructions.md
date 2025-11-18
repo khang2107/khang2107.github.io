@@ -10,7 +10,7 @@ Purpose: help an AI coding agent become productive quickly. Focus on the static 
 -   Project type: Single-page static portfolio built with plain HTML, CSS, and vanilla JavaScript. No build system, package manager, or tests in the repo.
 -   Key files:
     -   `index.html` — single-page structure, navigation anchor links, sections: home, about, skills, projects, experience, resume, contact. Uses `css/main.css` (modular CSS architecture).
-    -   `js/script.js` — all interactive behaviour: dark mode toggle (dual buttons for mobile/desktop), mobile nav with optimized animations, smooth scrolling, form handling (client-only), image loading optimization, IntersectionObserver for lazy loading.
+    -   `js/script.js` — all interactive behaviour: dark mode toggle, mobile nav with optimized animations, smooth scrolling, form handling, image loading optimization, IntersectionObserver for lazy loading.
     -   `css/main.css` — **Entry point** that imports modular CSS following ITCSS methodology (Settings → Base → Layout → Components → Pages → Utilities).
     -   `css/` structure:
         -   `base/` — variables.css (design tokens), reset.css, typography.css, images.css (loading optimization)
@@ -35,24 +35,23 @@ What to change and how
 
 Conventions & patterns to follow
 
--   **Dark mode**: toggled by adding/removing `dark-mode` on `body`; two toggle buttons exist:
-    -   `#darkModeToggle` — visible on mobile next to hamburger (in `.nav-controls`)
-    -   `#darkModeToggleMenu` — visible on desktop in nav menu
-    -   Both buttons sync icons between `fa-moon` and `fa-sun`, controlled by `toggleDarkMode()` function in `js/script.js`
+-   **Dark mode**: toggled by adding/removing `dark-mode` on `body`:
+    -   Single `#darkModeToggle` button in nav menu switches icon between `fa-moon` and `fa-sun`
     -   Theme persisted in `localStorage` as `theme: "dark"` or `theme: "light"`
+    -   On toggle, `updateNavbarColors()` adjusts navbar glassmorphism background immediately
 -   **Navigation**: 
-    -   Mobile: hamburger menu (`#navToggle`) opens full-screen overlay (`#navMenu.active`)
-    -   Uses `requestAnimationFrame` for smooth 60fps animations
-    -   Body scroll locked when menu open (`body.style.overflow = "hidden"`)
-    -   Performance optimized: GPU acceleration (`transform: translateZ(0)`), reduced blur on mobile (`blur(10px)`), `contain: layout style paint`
-    -   Close button (`#navClose`) and nav links auto-close menu via `closeMenu()` function
+    -   Mobile: hamburger (`#navToggle`) toggles `.active` class on `#navMenu` for full-screen overlay
+    -   Desktop: inline horizontal nav menu with glassmorphism (`backdrop-filter: saturate(180%) blur(20px)`)
+    -   Close button (`#navClose`) and `.nav-link` clicks remove `.active` to close menu
+    -   Scroll handler updates navbar background opacity and box-shadow at 100px threshold
+    -   Active section highlighting uses `requestAnimationFrame` throttling for performance
 -   **Performance patterns**:
     -   Image loading: `loading="eager"` for above-fold, `loading="lazy"` for below-fold
     -   IntersectionObserver with `rootMargin: "100px"` for lazy images
     -   Shimmer loading animation in `css/base/images.css` (`.achievement-item::before`)
     -   Preloading critical resources in `<head>` (CSS, hero image)
 -   **Animations**: IntersectionObserver is used for reveal animations. Prefer reusing the existing observer logic or adding new selectors observed in `js/script.js`.
--   **Contact form**: client-only. The form currently prevents default submit and shows an alert. If implementing a backend integration, keep the current UX (reset and success message) and ensure no new third-party keys are committed.
+-   **Contact form**: submits to Web3Forms API. Form handler in `js/script.js` uses `fetch()` with async/await, shows loading state during submission, resets form on success. Error handling logs to console and shows user-friendly alerts.
 
 Common tasks and examples
 
@@ -76,7 +75,14 @@ Example: add a small CTA modal
 Example: optimize Experience section for large screens
 
 -   CSS: Edit `css/pages/experience.css` for base styles, then add responsive overrides in `css/utilities/responsive.css` using breakpoints like `@media (min-width: 1401px)`.
--   Pattern: Mobile-first base styles, progressively enhanced for tablet (969px-1400px), large (1401px-1920px), and ultra-wide (>1920px) screens.
+-   Pattern: Mobile-first base styles (max-width: 1000px timeline), progressively enhanced for large (1401px - max-width: 1200px) and ultra-wide (1601px+ - max-width: 1400px) screens.
+
+Deployment & External Dependencies
+
+-   **Hosting**: GitHub Pages (static site) with custom domain `khang.me` (defined in `CNAME`)
+-   **Contact form**: Uses Web3Forms API (external service) — form submits to their endpoint asynchronously
+-   **External resources**: Font Awesome 6.4.0 (CDN), Google Fonts (Inter family)
+-   **No build process**: Changes pushed to `main` branch deploy automatically via GitHub Pages
 
 Safety and repository rules
 

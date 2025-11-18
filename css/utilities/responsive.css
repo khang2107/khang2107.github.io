@@ -469,6 +469,40 @@
 	}
 }
 
+/* Large Desktop Screens - Expand Experience section */
+@media (min-width: 1401px) {
+	.timeline {
+		max-width: 1200px;
+	}
+
+	.timeline-item {
+		gap: 3rem;
+	}
+
+	.timeline-content {
+		padding: 2.75rem;
+	}
+}
+
+/* Ultra-Wide Screens - Maximum expansion */
+@media (min-width: 1601px) {
+	.timeline {
+		max-width: 1400px;
+	}
+
+	.timeline-item {
+		gap: 3.5rem;
+	}
+
+	.timeline-content {
+		padding: 3rem;
+	}
+
+	.timeline-content h3 {
+		font-size: 1.625rem;
+	}
+}
+
 /* Extra Small Mobile Devices (iPhone SE, etc.) */
 @media (max-width: 375px) {
 	.hero-buttons {
