@@ -273,12 +273,15 @@
 
 	.projects-nav-mobile {
 		padding: 1rem 1rem 0 1rem;
+		gap: 0.625rem;
 	}
 
 	.projects-nav-mobile-btn {
 		width: 36px;
 		height: 36px;
 		font-size: 0.875rem;
+		min-width: 36px;
+		min-height: 36px;
 	}
 
 	.project-card-link {

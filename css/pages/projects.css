@@ -101,6 +101,8 @@ body.dark-mode .projects-nav-btn:hover {
 	justify-content: flex-end;
 	gap: 0.75rem;
 	padding: 1.5rem 2rem 0 2rem;
+	position: relative;
+	z-index: 5;
 }
 
 .projects-nav-mobile-btn {
@@ -117,11 +119,13 @@ body.dark-mode .projects-nav-btn:hover {
 	color: var(--text-primary);
 	font-size: 1rem;
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	-webkit-tap-highlight-color: transparent;
 	touch-action: manipulation;
 	user-select: none;
 	-webkit-user-select: none;
+	pointer-events: auto;
+	flex-shrink: 0;
 }
 
 body.dark-mode .projects-nav-mobile-btn {
@@ -136,6 +140,7 @@ body.dark-mode .projects-nav-mobile-btn {
 .projects-nav-mobile-btn:disabled {
 	opacity: 0.3;
 	cursor: not-allowed;
+	pointer-events: none;
 }
 
 .projects-nav-mobile-btn:focus {
@@ -161,6 +166,8 @@ body.dark-mode .projects-nav-mobile-btn {
 	padding-bottom: 1.5rem;
 	scroll-snap-type: x mandatory;
 	scroll-padding-left: max(2rem, calc((100vw - 1200px) / 2 + 2rem));
+	overscroll-behavior-x: contain;
+	overscroll-behavior-y: none;
 	will-change: scroll-position;
 	transform: translateZ(0);
 	-webkit-transform: translateZ(0);

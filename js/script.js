@@ -188,7 +188,7 @@ function handleScroll() {
 
 window.addEventListener("scroll", handleScroll, { passive: true });
 
-// Projects Horizontal Scroll Navigation (Apple-style)
+// Projects Horizontal Scroll Navigation (Apple-style - Improved)
 const projectsScroll = document.getElementById("projectsScroll");
 const projectsNavPrev = document.querySelector(".projects-nav-prev");
 const projectsNavNext = document.querySelector(".projects-nav-next");
@@ -197,129 +197,172 @@ const projectsNavMobileNext = document.querySelector(".projects-nav-mobile-next"
 
 if (projectsScroll) {
 	const projectCards = projectsScroll.querySelectorAll(".project-card-link");
+	let isScrolling = false;
+	let scrollTimeout = null;
 	
-	// Function to get current card index
-	function getCurrentCardIndex() {
-		const scrollLeft = projectsScroll.scrollLeft;
+	// Get card dimensions
+	function getCardDimensions() {
+		if (projectCards.length === 0) return { width: 0, gap: 0 };
 		const cardWidth = projectCards[0].offsetWidth;
-		const gap = parseFloat(getComputedStyle(projectsScroll).gap);
-		return Math.round(scrollLeft / (cardWidth + gap));
+		const containerStyle = getComputedStyle(projectsScroll);
+		const gap = parseFloat(containerStyle.gap) || 0;
+		return { width: cardWidth, gap: gap };
 	}
 	
-	// Function to scroll to specific card
+	// Get current scroll position as card index
+	function getCurrentCardIndex() {
+		const { width, gap } = getCardDimensions();
+		if (width === 0) return 0;
+		const scrollLeft = projectsScroll.scrollLeft;
+		const cardStep = width + gap;
+		return Math.round(scrollLeft / cardStep);
+	}
+	
+	// Scroll to specific card by index (Apple-style smooth scroll)
 	function scrollToCard(index) {
-		const card = projectCards[index];
-		if (card) {
-			card.scrollIntoView({
-				behavior: "smooth",
-				block: "nearest",
-				inline: "center"
-			});
+		if (index < 0 || index >= projectCards.length) return;
+		
+		const { width, gap } = getCardDimensions();
+		const targetScrollLeft = index * (width + gap);
+		
+		// Use smooth scroll behavior
+		projectsScroll.scrollTo({
+			left: targetScrollLeft,
+			behavior: "smooth"
+		});
+	}
+	
+	// Check if can scroll in direction
+	function canScroll(direction) {
+		const currentIndex = getCurrentCardIndex();
+		if (direction === "prev") {
+			return currentIndex > 0;
+		} else {
+			return currentIndex < projectCards.length - 1;
 		}
 	}
 	
-	// Update button states based on scroll position
+	// Update button visibility and states
 	function updateNavButtons() {
 		const currentIndex = getCurrentCardIndex();
 		const maxIndex = projectCards.length - 1;
+		const atStart = currentIndex <= 0;
+		const atEnd = currentIndex >= maxIndex;
 		
-		// Desktop buttons (if they exist)
+		// Desktop buttons
 		if (projectsNavPrev && projectsNavNext) {
-			// Show/hide previous button
-			if (currentIndex <= 0) {
+			if (atStart) {
 				projectsNavPrev.classList.remove("visible");
 			} else {
 				projectsNavPrev.classList.add("visible");
 			}
 			
-			// Show/hide next button
-			if (currentIndex >= maxIndex) {
+			if (atEnd) {
 				projectsNavNext.classList.remove("visible");
 			} else {
 				projectsNavNext.classList.add("visible");
 			}
 		}
 		
-		// Mobile buttons (if they exist)
+		// Mobile buttons
 		if (projectsNavMobilePrev && projectsNavMobileNext) {
-			// Disable/enable previous button
-			projectsNavMobilePrev.disabled = currentIndex <= 0;
-			
-			// Disable/enable next button
-			projectsNavMobileNext.disabled = currentIndex >= maxIndex;
+			projectsNavMobilePrev.disabled = atStart;
+			projectsNavMobileNext.disabled = atEnd;
 		}
 	}
 	
-	// Navigation function
-	function navigateProjects(direction) {
-		// Save current scroll position
-		const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+	// Navigate to previous/next card
+	function navigateProjects(direction, event) {
+		// Prevent any default behavior
+		if (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+		}
+		
+		// Prevent multiple rapid clicks
+		if (isScrolling) return;
+		
+		// Check if can scroll in this direction
+		if (!canScroll(direction)) return;
+		
+		isScrolling = true;
 		
 		const currentIndex = getCurrentCardIndex();
-		if (direction === "prev" && currentIndex > 0) {
-			scrollToCard(currentIndex - 1);
-		} else if (direction === "next" && currentIndex < projectCards.length - 1) {
-			scrollToCard(currentIndex + 1);
+		const newIndex = direction === "prev" ? currentIndex - 1 : currentIndex + 1;
+		
+		// Scroll to the card
+		scrollToCard(newIndex);
+		
+		// Remove focus from button to prevent scroll-on-focus issues
+		if (event && event.target) {
+			event.target.blur();
 		}
 		
-		// Restore scroll position after a brief delay
-		setTimeout(() => {
-			window.scrollTo(0, currentScrollY);
-		}, 0);
+		// Reset scrolling flag after animation
+		clearTimeout(scrollTimeout);
+		scrollTimeout = setTimeout(() => {
+			isScrolling = false;
+			updateNavButtons();
+		}, 600);
 	}
 	
-	// Desktop previous button
+	// Desktop navigation buttons
 	if (projectsNavPrev) {
-		projectsNavPrev.addEventListener("click", (e) => {
+		projectsNavPrev.addEventListener("click", (e) => navigateProjects("prev", e), false);
+		projectsNavPrev.addEventListener("touchstart", (e) => {
 			e.preventDefault();
-			navigateProjects("prev");
-		});
+			navigateProjects("prev", e);
+		}, { passive: false });
 	}
 	
-	// Desktop next button
 	if (projectsNavNext) {
-		projectsNavNext.addEventListener("click", (e) => {
+		projectsNavNext.addEventListener("click", (e) => navigateProjects("next", e), false);
+		projectsNavNext.addEventListener("touchstart", (e) => {
 			e.preventDefault();
-			navigateProjects("next");
-		});
+			navigateProjects("next", e);
+		}, { passive: false });
 	}
 	
-	// Mobile previous button
+	// Mobile navigation buttons
 	if (projectsNavMobilePrev) {
-		projectsNavMobilePrev.addEventListener("click", (e) => {
+		projectsNavMobilePrev.addEventListener("click", (e) => navigateProjects("prev", e), false);
+		projectsNavMobilePrev.addEventListener("touchstart", (e) => {
 			e.preventDefault();
-			e.stopPropagation();
-			navigateProjects("prev");
-			// Prevent focus from scrolling page
-			projectsNavMobilePrev.blur();
-		});
+			navigateProjects("prev", e);
+		}, { passive: false });
 	}
 	
-	// Mobile next button
 	if (projectsNavMobileNext) {
-		projectsNavMobileNext.addEventListener("click", (e) => {
+		projectsNavMobileNext.addEventListener("click", (e) => navigateProjects("next", e), false);
+		projectsNavMobileNext.addEventListener("touchstart", (e) => {
 			e.preventDefault();
-			e.stopPropagation();
-			navigateProjects("next");
-			// Prevent focus from scrolling page
-			projectsNavMobileNext.blur();
-		});
+			navigateProjects("next", e);
+		}, { passive: false });
 	}
 	
-	// Update buttons on scroll
-	let projectsScrollTimeout;
+	// Update button states on scroll (with debouncing)
+	let scrollUpdateTimeout;
 	projectsScroll.addEventListener("scroll", () => {
-		clearTimeout(projectsScrollTimeout);
-		projectsScrollTimeout = setTimeout(updateNavButtons, 100);
+		clearTimeout(scrollUpdateTimeout);
+		scrollUpdateTimeout = setTimeout(() => {
+			if (!isScrolling) {
+				updateNavButtons();
+			}
+		}, 150);
 	}, { passive: true });
 	
-	// Initial button state
-	updateNavButtons();
-	
-	// Update on window resize
+	// Update on window resize (with debouncing)
+	let resizeTimeout;
 	window.addEventListener("resize", () => {
-		updateNavButtons();
+		clearTimeout(resizeTimeout);
+		resizeTimeout = setTimeout(() => {
+			updateNavButtons();
+		}, 250);
 	}, { passive: true });
+	
+	// Initial setup
+	updateNavButtons();
 }
 
 // Contact Form Handler
@@ -483,7 +526,8 @@ function createScrollToTopButton() {
         font-size: 1.25rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
-        z-index: 999;
+        z-index: 100;
+        pointer-events: auto;
     `;
 
 	document.body.appendChild(button);
