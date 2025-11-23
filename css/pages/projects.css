@@ -167,7 +167,7 @@ body.dark-mode .projects-nav-mobile-btn {
 	scroll-snap-type: x mandatory;
 	scroll-padding-left: max(2rem, calc((100vw - 1200px) / 2 + 2rem));
 	overscroll-behavior-x: contain;
-	overscroll-behavior-y: none;
+	/* overscroll-behavior-y: none; */
 	will-change: scroll-position;
 	transform: translateZ(0);
 	-webkit-transform: translateZ(0);
