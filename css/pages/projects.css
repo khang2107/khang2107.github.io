@@ -147,25 +147,6 @@ body.dark-mode .projects-nav-mobile-btn {
 	outline-offset: 2px;
 }
 
-.projects-wrapper::after {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 1.5rem;
-	width: 100px;
-	background: linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);
-	pointer-events: none;
-	opacity: 0.8;
-	z-index: 1;
-}
-
-@media (max-width: 968px) {
-	.projects-wrapper::after {
-		width: 60px;
-	}
-}
-
 .projects-scroll {
 	display: flex;
 	gap: 1.5rem;
