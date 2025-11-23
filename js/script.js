@@ -334,7 +334,7 @@ contactForm.addEventListener("submit", async (e) => {
 
 	// Disable button and show loading state
 	submitButton.disabled = true;
-	submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+	submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
 	try {
 		// Submit form to Web3Forms
